@@ -21,6 +21,6 @@ provider "azurerm" {
 
 
 resource "azurerm_resource_group" "state-demo-secure" {
-  name     = "state-demoo"
+  name     = "state-demo"
   location = "northeurope"
 }
