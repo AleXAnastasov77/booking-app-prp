@@ -18,6 +18,10 @@ jobs:
       contents: read
 
     env:
+      ARM_USE_OIDC: true
+      ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
       BACKEND_IMAGE: ${{ github.event.client_payload.backend_image }}
       FRONTEND_IMAGE: ${{ github.event.client_payload.frontend_image }}
       ADMIN_IMAGE: ${{ github.event.client_payload.admin_image }}
@@ -75,6 +79,10 @@ jobs:
       contents: read
 
     env:
+      ARM_USE_OIDC: true
+      ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
       BACKEND_IMAGE: ${{ github.event.client_payload.backend_image }}
       FRONTEND_IMAGE: ${{ github.event.client_payload.frontend_image }}
       ADMIN_IMAGE: ${{ github.event.client_payload.admin_image }}
