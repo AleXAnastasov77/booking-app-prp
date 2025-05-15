@@ -47,9 +47,9 @@ jobs:
       - name: Terraform Plan
         run: |
           terraform plan -out=tfplan \
-            -var="backend_image=$BACKEND_IMAGE" \
-            -var="frontend_image=$FRONTEND_IMAGE" \
-            -var="admin_image=$ADMIN_IMAGE"
+          # -var="backend_image=$BACKEND_IMAGE" \
+          # -var="frontend_image=$FRONTEND_IMAGE" \
+          # -var="admin_image=$ADMIN_IMAGE"
         working-directory: ./infra
 
       - name: Show Terraform Plan Output
