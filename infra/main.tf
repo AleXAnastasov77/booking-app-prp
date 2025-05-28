@@ -104,7 +104,7 @@ resource "azurerm_private_dns_zone_virtual_network_link" "mysql_dns_link001" {
   private_dns_zone_name = azurerm_private_dns_zone.mysql_private_dns_zone.name
   virtual_network_id    = azurerm_virtual_network.booking_hub_vnet.id
 }
-resource "azurerm_private_dns_zone_virtual_network_link" "mysql_dns_link001" {
+resource "azurerm_private_dns_zone_virtual_network_link" "mysql_dns_link002" {
   name                  = "dnslink-northeu-002"
   resource_group_name   = var.resource_group_name_platform
   private_dns_zone_name = azurerm_private_dns_zone.mysql_private_dns_zone.name
