@@ -65,3 +65,34 @@ resource "azurerm_virtual_network" "booking_spoke_vnet" {
     #default_outbound_access_enabled = false
   }
 }
+
+resource "azurerm_virtual_network_peering" "hub_to_spoke" {
+  name = "hub-to-spoke"
+  resource_group_name = var.resource_group_name_platform
+  virtual_network_name = azurerm_virtual_network.booking_hub_vnet.name
+  remote_virtual_network_id = azurerm_virtual_network.booking_spoke_vnet.id
+}
+resource "azurerm_virtual_network_peering" "spoke_to_hub" {
+  name = "spoke-to-hub"
+  resource_group_name = var.resource_group_name
+  virtual_network_name = azurerm_virtual_network.booking_spoke_vnet.name
+  remote_virtual_network_id = azurerm_virtual_network.booking_hub_vnet.id
+}
+
+# resource "azurerm_private_dns_zone" "fonteyn_private_dns_zone" {
+#   name                = "fonteyn.private"
+#   resource_group_name = azurerm_resource_group.booking_rg.name
+# }
+
+# resource "azurerm_private_dns_zone_virtual_network_link" "fonteyn_private_dns_zone_link1" {
+#   name                  = "dnslink-northeu-001"
+#   resource_group_name   = azurerm_resource_group.booking_rg.name
+#   private_dns_zone_name = azurerm_private_dns_zone.fonteyn_private_dns_zone.name
+#   virtual_network_id    = azurerm_virtual_network.booking_hub_vnet.id
+# }
+# resource "azurerm_private_dns_zone_virtual_network_link" "fonteyn_private_dns_zone_link2" {
+#   name                  = "dnslink-northeu-002"
+#   resource_group_name   = azurerm_resource_group.booking_rg.name
+#   private_dns_zone_name = azurerm_private_dns_zone.fonteyn_private_dns_zone.name
+#   virtual_network_id    = azurerm_virtual_network.booking_spoke_vnet.id
+# }
