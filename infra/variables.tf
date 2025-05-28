@@ -33,3 +33,13 @@ variable "hub_vnet_name" {
   description = "Name of the hub virtual network"
   type = string
 }
+
+variable "mysqldb_name" {
+  description = "Name of the MySQL Flexible Database"
+  type = string  
+}
+
+variable "mysqldb_sku" {
+  description = "SKU name of the MySQL Flexible Database"
+  type = string
+}
