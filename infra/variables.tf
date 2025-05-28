@@ -13,6 +13,11 @@ variable "resource_group_name" {
   type = string
 }
 
+variable "resource_group_name_platform" { 
+  description = "Name of the resource group"
+  type = string
+}
+
 variable "location" {
   description = "Name of the location used for the resources"
   type = string
