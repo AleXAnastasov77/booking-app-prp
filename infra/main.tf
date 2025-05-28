@@ -32,7 +32,7 @@ resource "azurerm_virtual_network" "booking_hub_vnet" {
   address_space       = ["10.0.0.0/16"]
   tags = var.tags
 
-  subnet {
+  subnet { # Subnet for mysql database
     name             = "subnet-db"
     address_prefixes = ["10.0.1.0/24"]
     #default_outbound_access_enabled = false
@@ -42,5 +42,26 @@ resource "azurerm_virtual_network" "booking_hub_vnet" {
         name = "Microsoft.DBforMySQL/flexibleServers"
       }
     }
+  }
+  
+  subnet { # Subnet for keyvault
+    name             = "subnet-keyvault"
+    address_prefixes = ["10.0.2.0/24"]
+    #default_outbound_access_enabled = false
+  }
+}
+
+resource "azurerm_virtual_network" "booking_spoke_vnet" {
+  name                = var.spoke_vnet_name
+  location            = azurerm_resource_group.booking_rg.location
+  resource_group_name = var.resource_group_name
+  address_space       = ["10.1.0.0/16"]
+  tags = var.tags
+
+  
+  subnet { # Subnet for container apps environment
+    name             = "subnet-containerenvironment"
+    address_prefixes = ["10.1.1.0/24"]
+    #default_outbound_access_enabled = false
   }
 }
