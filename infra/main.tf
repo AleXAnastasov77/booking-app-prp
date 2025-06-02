@@ -122,7 +122,7 @@ resource "azurerm_key_vault" "booking_keyvault" {
 }
 resource "azurerm_role_assignment" "terraform_keyvault_access" {
   principal_id         = data.azurerm_client_config.current.object_id
-  role_definition_name = "Key Vault Secrets Officer"
+  role_definition_name = "Key Vault Secrets Administrator"
   scope                = azurerm_key_vault.booking_keyvault.id
 }
 resource "azurerm_key_vault_secret" "mysql_username" {
