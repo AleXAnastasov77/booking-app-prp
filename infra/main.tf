@@ -19,6 +19,8 @@ provider "azurerm" {
   features {}
 }
 
+data "azurerm_client_config" "current" {}
+
 resource "azurerm_resource_group" "booking_rg" {
   name     = var.resource_group_name
   location = var.location
@@ -135,7 +137,7 @@ resource "azurerm_key_vault" "booking_keyvault" {
   sku_name                   = "standard"
   soft_delete_retention_days = 10
   purge_protection_enabled   = false
-  tags = var.tags
+  tags                       = var.tags
 }
 resource "azurerm_role_assignment" "terraform_keyvault_access" {
   principal_id         = data.azurerm_client_config.current.object_id
