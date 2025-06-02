@@ -152,10 +152,12 @@ resource "azurerm_role_assignment" "terraform_keyvault_access" {
 resource "azurerm_key_vault_secret" "mysql_username" {
   name         = "mysql-username"
   key_vault_id = azurerm_key_vault.booking_keyvault.id
+  value = var.mysql_username
 }
 resource "azurerm_key_vault_secret" "mysql_password" {
   name         = "mysql-password"
   key_vault_id = azurerm_key_vault.booking_keyvault.id
+  value = var.mysql_password
 }
 # resource "azurerm_mysql_flexible_server" "booking_db" {
 #   name = var.mysqldb_name
