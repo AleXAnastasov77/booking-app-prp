@@ -11,5 +11,5 @@ mysqldb_name = "mysqldb-booking-prod-northeu-001"
 mysqldb_sku  = "B_Standard_B1ms"
 
 # Key Vault name
-keyvault_name = "keyvault-booking-prod-northeu-001"
+keyvault_name = "kv-booking-prod-northeu"
 
