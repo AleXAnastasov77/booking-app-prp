@@ -104,7 +104,7 @@ resource "azurerm_private_dns_zone" "mysql_private_dns_zone" {
   resource_group_name = var.resource_group_name_platform
 }
 resource "azurerm_private_dns_zone" "keyvault_private_dns_zone" {
-  name                = "	privatelink.vaultcore.azure.net"
+  name                = "privatelink.vaultcore.azure.net"
   resource_group_name = var.resource_group_name_platform
 }
 
