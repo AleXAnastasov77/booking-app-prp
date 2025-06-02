@@ -142,6 +142,7 @@ resource "azurerm_key_vault" "booking_keyvault" {
   soft_delete_retention_days = 10
   purge_protection_enabled   = false
   tags                       = var.tags
+  enable_rbac_authorization  = true
 }
 resource "azurerm_role_assignment" "terraform_keyvault_access" {
   principal_id         = data.azurerm_client_config.current.object_id
