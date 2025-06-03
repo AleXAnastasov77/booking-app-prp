@@ -128,30 +128,30 @@ resource "azurerm_role_assignment" "terraform_keyvault_access" {
 resource "azurerm_key_vault_secret" "mysql_username" {
   name         = "mysql-username"
   key_vault_id = azurerm_key_vault.booking_keyvault.id
-  value = var.mysql_username
+  value        = var.mysql_username
 }
 resource "azurerm_key_vault_secret" "mysql_password" {
   name         = "mysql-password"
   key_vault_id = azurerm_key_vault.booking_keyvault.id
-  value = var.mysql_password
+  value        = var.mysql_password
 }
 resource "azurerm_mysql_flexible_server" "booking_db" {
-  name = var.mysqldb_name
-  resource_group_name = var.resource_group_name_platform
-  location = var.location
-  administrator_login = azurerm_key_vault_secret.mysql_username.value
-  administrator_password = azurerm_key_vault_secret.mysql_password.value
-  sku_name = var.mysqldb_sku
-  private_dns_zone_id = azurerm_private_dns_zone.mysql_private_dns_zone.id
-  delegated_subnet_id = azurerm_subnet.db_subnet.id
-  backup_retention_days  = 7
+  name                         = var.mysqldb_name
+  resource_group_name          = var.resource_group_name_platform
+  location                     = "West Europe"
+  administrator_login          = azurerm_key_vault_secret.mysql_username.value
+  administrator_password       = azurerm_key_vault_secret.mysql_password.value
+  sku_name                     = var.mysqldb_sku
+  private_dns_zone_id          = azurerm_private_dns_zone.mysql_private_dns_zone.id
+  delegated_subnet_id          = azurerm_subnet.db_subnet.id
+  backup_retention_days        = 7
   geo_redundant_backup_enabled = true
-  tags = var.tags
+  tags                         = var.tags
 
-  storage { 
+  storage {
     io_scaling_enabled = true
-    auto_grow_enabled = true
-    size_gb = 20
+    auto_grow_enabled  = true
+    size_gb            = 20
   }
 
   depends_on = [azurerm_private_dns_zone_virtual_network_link.mysql_dns_link001, azurerm_private_dns_zone_virtual_network_link.mysql_dns_link002]

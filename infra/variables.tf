@@ -51,9 +51,9 @@ variable "keyvault_name" {
 
 variable "mysql_username" {
   description = "Username of the MySQL"
-  type = string
+  type        = string
 }
 variable "mysql_password" {
   description = "Password of the MySQL"
-  type = string
+  type        = string
 }
