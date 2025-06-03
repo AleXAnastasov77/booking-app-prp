@@ -144,6 +144,15 @@ resource "azurerm_mysql_flexible_server" "booking_db" {
   sku_name = var.mysqldb_sku
   private_dns_zone_id = azurerm_private_dns_zone.mysql_private_dns_zone.id
   delegated_subnet_id = azurerm_subnet.db_subnet.id
+  backup_retention_days  = 7
+  geo_redundant_backup_enabled = true
+  tags = var.tags
+
+  storage { 
+    io_scaling_enabled = true
+    auto_grow_enabled = true
+    size_gb = 20
+  }
 
   depends_on = [azurerm_private_dns_zone_virtual_network_link.mysql_dns_link001, azurerm_private_dns_zone_virtual_network_link.mysql_dns_link002]
 }
