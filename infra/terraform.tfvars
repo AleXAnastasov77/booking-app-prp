@@ -7,7 +7,7 @@ spoke_vnet_name = "vnetSpoke-booking-prod-northeu-001"
 hub_vnet_name   = "vnetHub-booking-prod-northeu-001"
 
 # DB names
-mysqldb_name = "mysqldb-booking-prod-northeu-001"
+mysqldb_name = "mysqldb-booking-prod-westeu-001"
 mysqldb_sku  = "B_Standard_B1ms"
 
 # Key Vault name
