@@ -138,7 +138,7 @@ resource "azurerm_key_vault_secret" "mysql_password" {
 resource "azurerm_mysql_flexible_server" "booking_db" {
   name                         = var.mysqldb_name
   resource_group_name          = var.resource_group_name_platform
-  location                     = "West Europe"
+  location                     = var.location
   administrator_login          = azurerm_key_vault_secret.mysql_username.value
   administrator_password       = azurerm_key_vault_secret.mysql_password.value
   sku_name                     = var.mysqldb_sku

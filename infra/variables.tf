@@ -21,7 +21,7 @@ variable "resource_group_name_platform" {
 variable "location" {
   description = "Name of the location used for the resources"
   type        = string
-  default     = "northeurope"
+  default     = "West Europe"
 }
 
 variable "spoke_vnet_name" {
