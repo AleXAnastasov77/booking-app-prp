@@ -11,7 +11,6 @@ terraform {
     storage_account_name = "tfstatefonteyn"
     container_name       = "tfstate"
     key                  = "prod.terraform.tfstate"
-
   }
 }
 

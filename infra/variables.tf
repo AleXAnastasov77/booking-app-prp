@@ -4,7 +4,7 @@ variable "tags" {
   default = {
     environment = "Production"
     owner       = "Aleks Anastasov"
-    region      = "North Europe"
+    region      = "West Europe"
   }
 }
 
