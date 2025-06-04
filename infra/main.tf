@@ -59,7 +59,7 @@ resource "azurerm_subnet" "containerapps_subnet" {
   resource_group_name  = var.resource_group_name
   virtual_network_name = azurerm_virtual_network.booking_spoke_vnet.name
   address_prefixes     = ["10.1.1.0/24"]
-  # default_outbound_access_enabled = false  # Only used in azurerm_subnet for container apps
+  # default_outbound_access_enabled = false 
 }
 
 
@@ -79,7 +79,7 @@ resource "azurerm_virtual_network_peering" "spoke_to_hub" {
 }
 
 
-#Private DNS Zone for the database
+# Private DNS Zone for the database and key vault
 resource "azurerm_private_dns_zone" "mysql_private_dns_zone" {
   name                = "privatelink.mysql.database.azure.com"
   resource_group_name = azurerm_resource_group.platform_rg.name
@@ -89,6 +89,7 @@ resource "azurerm_private_dns_zone" "keyvault_private_dns_zone" {
   resource_group_name = azurerm_resource_group.platform_rg.name
 }
 
+# Connecting DNS zones to the hub and spoke virtual networks
 resource "azurerm_private_dns_zone_virtual_network_link" "mysql_dns_link001" {
   name                  = "dnslink-northeu-001"
   resource_group_name   = azurerm_resource_group.platform_rg.name
@@ -114,6 +115,8 @@ resource "azurerm_private_dns_zone_virtual_network_link" "keyvault_dns_link002" 
   virtual_network_id    = azurerm_virtual_network.booking_spoke_vnet.id
 }
 
+
+# Creating key vault 
 resource "azurerm_key_vault" "booking_keyvault" {
   name                       = var.keyvault_name
   location                   = var.location
@@ -125,6 +128,8 @@ resource "azurerm_key_vault" "booking_keyvault" {
   tags                       = var.tags
   enable_rbac_authorization  = true
 }
+
+# Giving terraform access to the key vault
 resource "azurerm_role_assignment" "terraform_keyvault_access" {
   principal_id         = data.azurerm_client_config.current.object_id
   role_definition_name = "Key Vault Secrets Officer"
@@ -147,8 +152,9 @@ resource "azurerm_mysql_flexible_server" "booking_db" {
   administrator_login          = azurerm_key_vault_secret.mysql_username.value
   administrator_password       = azurerm_key_vault_secret.mysql_password.value
   sku_name                     = var.mysqldb_sku
-  private_dns_zone_id          = azurerm_private_dns_zone.mysql_private_dns_zone.id
-  delegated_subnet_id          = azurerm_subnet.db_subnet.id
+  # private_dns_zone_id          = azurerm_private_dns_zone.mysql_private_dns_zone.id
+  # delegated_subnet_id          = azurerm_subnet.db_subnet.id
+  public_network_access = "Enabled"
   backup_retention_days        = 7
   geo_redundant_backup_enabled = false
   tags                         = var.tags
