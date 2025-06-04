@@ -135,6 +135,8 @@ resource "azurerm_role_assignment" "terraform_keyvault_access" {
   role_definition_name = "Key Vault Secrets Officer"
   scope                = azurerm_key_vault.booking_keyvault.id
 }
+
+# Key vault secrets
 resource "azurerm_key_vault_secret" "mysql_username" {
   name         = "mysql-username"
   key_vault_id = azurerm_key_vault.booking_keyvault.id
@@ -145,6 +147,8 @@ resource "azurerm_key_vault_secret" "mysql_password" {
   key_vault_id = azurerm_key_vault.booking_keyvault.id
   value        = var.mysql_password
 }
+
+# MySQL DB
 resource "azurerm_mysql_flexible_server" "booking_db" {
   name                         = var.mysqldb_name
   resource_group_name          = azurerm_resource_group.platform_rg.name
@@ -166,6 +170,15 @@ resource "azurerm_mysql_flexible_server" "booking_db" {
   }
 
   depends_on = [azurerm_private_dns_zone_virtual_network_link.mysql_dns_link001, azurerm_private_dns_zone_virtual_network_link.mysql_dns_link002]
+}
+
+# Firewall rule
+resource "azurerm_mysql_flexible_server_firewall_rule" "alexip_db_access" {
+  name                = "ClientIPAddress_AlexFontys"
+  resource_group_name = azurerm_resource_group.platform_rg.name
+  server_name         = azurerm_mysql_flexible_server.booking_db.name
+  start_ip_address    = "145.93.124.167"
+  end_ip_address      = "145.93.124.167"
 }
 
 resource "azurerm_container_registry" "fonteyn_acr" {
