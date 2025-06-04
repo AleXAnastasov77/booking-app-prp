@@ -57,3 +57,8 @@ variable "mysql_password" {
   description = "Password of the MySQL"
   type        = string
 }
+
+variable "acr_name" {
+  description = "Name of the Azure Container Registry"
+  type        = string
+}

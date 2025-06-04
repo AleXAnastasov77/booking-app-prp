@@ -161,3 +161,18 @@ resource "azurerm_mysql_flexible_server" "booking_db" {
 
   depends_on = [azurerm_private_dns_zone_virtual_network_link.mysql_dns_link001, azurerm_private_dns_zone_virtual_network_link.mysql_dns_link002]
 }
+
+resource "azurerm_container_registry" "fonteyn_acr" {
+  name = var.acr_name
+  resource_group_name = azurerm_resource_group.platform_rg.name
+  location = var.location
+  sku = "Basic"
+  admin_enabled = false
+  tags = var.tags
+}
+
+resource "azurerm_role_assignment" "acr_push_permission" {
+  principal_id         = data.azurerm_client_config.current.object_id
+  role_definition_name = "AcrPush"
+  scope                = azurerm_container_registry.fonteyn_acr.id
+}
