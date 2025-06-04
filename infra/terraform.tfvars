@@ -16,3 +16,9 @@ keyvault_name = "kv-booking-prod-sweden"
 # ACR name
 acr_name = "crfonteyn001"
 
+# Logs name
+logs_name = "logs-booking-prod-sweden-001"
+
+# Container Env name
+containerenv_name = "containerenv-booking-prod-sweden-001"
+

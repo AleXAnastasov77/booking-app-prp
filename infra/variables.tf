@@ -62,3 +62,13 @@ variable "acr_name" {
   description = "Name of the Azure Container Registry"
   type        = string
 }
+
+variable "logs_name" {
+  default = "Name of the log analytics workspace"
+  type = string
+}
+
+variable "containerenv_name" {
+  default = "Name of the container app environment"
+  type = string
+}
