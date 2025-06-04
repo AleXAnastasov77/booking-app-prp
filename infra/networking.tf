@@ -44,7 +44,7 @@ resource "azurerm_subnet" "containerapps_subnet" {
   name                 = "subnet-containerenvironment"
   resource_group_name  = var.resource_group_name
   virtual_network_name = azurerm_virtual_network.booking_spoke_vnet.name
-  address_prefixes     = ["10.1.1.0/24"]
+  address_prefixes     = ["10.1.0.0/23"]
   # default_outbound_access_enabled = false 
 }
 
