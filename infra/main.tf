@@ -71,7 +71,7 @@ resource "azurerm_container_app" "booking_api" {
 }
 
 data "azurerm_container_app" "api_current" {
-  name                = "booking-api"
+  name                = var.container_api_name
   resource_group_name = azurerm_resource_group.booking_rg.name
 }
 
