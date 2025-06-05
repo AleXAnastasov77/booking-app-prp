@@ -61,6 +61,7 @@ resource "azurerm_container_app" "booking_api" {
       revision_suffix  = null
     }
   }
+  depends_on = [azurerm_role_assignment.acr_pull]
 }
 
 # data "azurerm_container_app" "api_current" {
