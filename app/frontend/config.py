@@ -16,6 +16,7 @@ def get_headers():
         "X-API-KEY": os.getenv("API_KEY")
     }
     return headers
+
 def get_secret_key():
     secret_key = os.getenv("SECRET_KEY")
     return secret_key
