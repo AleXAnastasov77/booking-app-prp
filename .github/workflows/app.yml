@@ -19,8 +19,8 @@ jobs:
       - name: Lint Python Code
         run: |
           pip install ruff
-          ruff check backend/
-          ruff check frontend/
+          ruff check app/backend/
+          ruff check app/frontend/
 
       # 3. Set image tag using commit SHA
       - name: Set image tag
