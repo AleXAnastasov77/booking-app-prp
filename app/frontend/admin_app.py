@@ -1,22 +1,18 @@
 import os
 import uuid
 from datetime import datetime
-
 import msal
-
 from flask import Flask, redirect, render_template, request, url_for
 from werkzeug.security import check_password_hash, generate_password_hash
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__, static_folder="staticEmployees", template_folder="templatesEmployees")
 
-
-
-
-from werkzeug.security import check_password_hash
-
-CLIENT_ID = "98de4856-0f4e-4dc1-b378-30a538aa72f7"
-CLIENT_SECRET = "-RN8Q~m0iycYKuZ8qoDAyzCPHkrs8C.3SE2uyb3L"
-AUTHORITY = "https://login.microsoftonline.com/1bec2e8a-e0a3-41c3-953c-518997ab3677"
+CLIENT_ID = os.getenv("CLIENT_ID")
+CLIENT_SECRET = os.getenv("CLIENT_SECRET")
+AUTHORITY = os.getenv("AUTHORITY")
 REDIRECT_PATH = "/getAToken"
 SCOPE = ["User.Read"]
 
