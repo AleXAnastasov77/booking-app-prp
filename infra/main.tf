@@ -2,15 +2,6 @@
 data "azurerm_client_config" "current" {}
 
 
-# data "azurerm_container_app" "frontend_current" {
-#   name                = "booking-frontend"
-#   resource_group_name = azurerm_resource_group.booking_rg.name
-# }
-
-# data "azurerm_container_app" "admin_current" {
-#   name                = "booking-admin"
-#   resource_group_name = azurerm_resource_group.booking_rg.name
-# }
 
 resource "azurerm_resource_group" "booking_rg" {
   name     = var.resource_group_name
@@ -81,8 +72,8 @@ resource "azurerm_container_app" "booking_frontend" {
   template {
     container {
       name = "fonteynfrontend"
-      #image  = local.frontend_image
-      image  = "${azurerm_container_registry.fonteyn_acr.login_server}/fonteyn-booking-app-frontend:1.0"
+      image  = local.frontend_image
+      #image  = "${azurerm_container_registry.fonteyn_acr.login_server}/fonteyn-booking-app-frontend:1.0"
       cpu    = 0.25
       memory = "0.5Gi"
       env {
@@ -124,8 +115,8 @@ resource "azurerm_container_app" "booking_admin" {
   template {
     container {
       name = "fonteynadmin"
-      #image  = local.backend_image
-      image  = "${azurerm_container_registry.fonteyn_acr.login_server}/fonteyn-booking-app-adminfrontend:1.0"
+      image  = local.backend_image
+      #image  = "${azurerm_container_registry.fonteyn_acr.login_server}/fonteyn-booking-app-adminfrontend:1.0"
       cpu    = 0.25
       memory = "0.5Gi"
       env {
@@ -163,5 +154,14 @@ data "azurerm_container_app" "api_current" {
   resource_group_name = azurerm_resource_group.booking_rg.name
 }
 
+data "azurerm_container_app" "frontend_current" {
+  name                = var.container_frontend_name
+  resource_group_name = azurerm_resource_group.booking_rg.name
+}
+
+data "azurerm_container_app" "admin_current" {
+  name                = var.container_admin_name
+  resource_group_name = azurerm_resource_group.booking_rg.name
+}
 
 
