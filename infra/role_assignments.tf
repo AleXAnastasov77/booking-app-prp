@@ -16,3 +16,9 @@ resource "azurerm_user_assigned_identity" "booking_identity" {
   location            = var.location
   resource_group_name = azurerm_resource_group.booking_rg.name
 }
+
+resource "azurerm_role_assignment" "acr_pull" {
+  principal_id         = azurerm_user_assigned_identity.booking_identity.principal_id
+  role_definition_name = "AcrPull"
+  scope                = azurerm_container_registry.fonteyn_acr.id
+}

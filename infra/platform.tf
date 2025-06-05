@@ -25,15 +25,15 @@ resource "azurerm_key_vault_secret" "mysql_password" {
 
 # MySQL DB
 resource "azurerm_mysql_flexible_server" "booking_db" {
-  name                         = var.mysqldb_name
-  resource_group_name          = azurerm_resource_group.platform_rg.name
-  location                     = var.location
-  administrator_login          = azurerm_key_vault_secret.mysql_username.value
-  administrator_password       = azurerm_key_vault_secret.mysql_password.value
-  sku_name                     = var.mysqldb_sku
+  name                   = var.mysqldb_name
+  resource_group_name    = azurerm_resource_group.platform_rg.name
+  location               = var.location
+  administrator_login    = azurerm_key_vault_secret.mysql_username.value
+  administrator_password = azurerm_key_vault_secret.mysql_password.value
+  sku_name               = var.mysqldb_sku
   # private_dns_zone_id          = azurerm_private_dns_zone.mysql_private_dns_zone.id
   # delegated_subnet_id          = azurerm_subnet.db_subnet.id
-  public_network_access = "Enabled"
+  public_network_access        = "Enabled"
   backup_retention_days        = 7
   geo_redundant_backup_enabled = false
   tags                         = var.tags
@@ -63,12 +63,12 @@ resource "azurerm_mysql_flexible_server_firewall_rule" "allow_azure_services" {
   end_ip_address      = "0.0.0.0"
 }
 resource "azurerm_container_registry" "fonteyn_acr" {
-  name = var.acr_name
+  name                = var.acr_name
   resource_group_name = azurerm_resource_group.platform_rg.name
-  location = var.location
-  sku = "Basic"
-  admin_enabled = false
-  tags = var.tags
+  location            = var.location
+  sku                 = "Basic"
+  admin_enabled       = false
+  tags                = var.tags
 }
 
 resource "azurerm_log_analytics_workspace" "booking_logs" {
@@ -77,5 +77,5 @@ resource "azurerm_log_analytics_workspace" "booking_logs" {
   resource_group_name = azurerm_resource_group.platform_rg.name
   sku                 = "PerGB2018"
   retention_in_days   = 30
-  tags = var.tags
+  tags                = var.tags
 }

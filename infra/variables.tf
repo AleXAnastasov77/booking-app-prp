@@ -65,10 +65,41 @@ variable "acr_name" {
 
 variable "logs_name" {
   default = "Name of the log analytics workspace"
-  type = string
+  type    = string
 }
 
 variable "containerenv_name" {
   default = "Name of the container app environment"
-  type = string
+  type    = string
+}
+
+# container names
+variable "container_api_name" {
+  description = "The container app name of the api"
+  type        = string
+}
+variable "container_frontend_name" {
+  description = "The container app name of the frontend"
+  type        = string
+}
+variable "container_admin_name" {
+  description = "The container app name of the admin frontend"
+  type        = string
+}
+
+# container images variables
+variable "backend_image" {
+  description = "The image name of the backend"
+  type        = string
+  default     = data.azurerm_container_app.api_current.template[0].container[0].image
+}
+variable "frontend_image" {
+  description = "The image name of the frontend"
+  type        = string
+  default     = data.azurerm_container_app.front_end_current.template[0].container[0].image
+}
+variable "admin_image" {
+  description = "The image name of the admin frontend"
+  type        = string
+  default     = data.azurerm_container_app.admin_current.template[0].container[0].image
 }

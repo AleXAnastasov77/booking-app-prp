@@ -22,3 +22,8 @@ logs_name = "logs-booking-prod-sweden-001"
 # Container Env name
 containerenv_name = "containerenv-booking-prod-sweden-001"
 
+# Containers names
+container_api_name      = "api-booking-prod-sweden-001"
+container_admin_name    = "admin-booking-prod-sweden-001"
+container_frontend_name = "frontend-booking-prod-sweden-001"
+
