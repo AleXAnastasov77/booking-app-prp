@@ -22,3 +22,9 @@ resource "azurerm_role_assignment" "acr_pull" {
   role_definition_name = "AcrPull"
   scope                = azurerm_container_registry.fonteyn_acr.id
 }
+
+resource "azurerm_role_assignment" "github_acr_pull" {
+  scope                = azurerm_container_registry.fonteyn_acr.id
+  role_definition_name = "AcrPull"
+  principal_id         = "a7c2abb4-ca2b-4746-af52-bcf8467ca658"
+}
