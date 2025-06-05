@@ -46,7 +46,7 @@ resource "azurerm_subnet" "containerapps_subnet" {
   virtual_network_name = azurerm_virtual_network.booking_spoke_vnet.name
   address_prefixes     = ["10.1.0.0/23"]
   # default_outbound_access_enabled = false
-  service_endpoints = "Microsoft.KeyVault"
+  service_endpoints = ["Microsoft.KeyVault"]
 }
 
 
