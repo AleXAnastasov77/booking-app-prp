@@ -1,10 +1,6 @@
 
 data "azurerm_client_config" "current" {}
 
-data "azurerm_container_app" "api_current" {
-  name                = "booking-api"
-  resource_group_name = azurerm_resource_group.booking_rg.name
-}
 
 # data "azurerm_container_app" "frontend_current" {
 #   name                = "booking-frontend"
@@ -67,6 +63,10 @@ resource "azurerm_container_app" "booking_api" {
   }
 }
 
+data "azurerm_container_app" "api_current" {
+  name                = "booking-api"
+  resource_group_name = azurerm_resource_group.booking_rg.name
+}
 
 
 
