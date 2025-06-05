@@ -61,6 +61,12 @@ resource "azurerm_container_app" "booking_api" {
       revision_suffix  = null
     }
   }
+
+  registry {
+    server               = azurerm_container_registry.fonteyn_acr.login_server
+    identity             = azurerm_user_assigned_identity.booking_identity.id
+  }
+
   depends_on = [azurerm_role_assignment.acr_pull, azurerm_role_assignment.github_acr_pull]
 }
 
