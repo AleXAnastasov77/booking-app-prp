@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- Hero Banner -->
+<section class="hero-banner">
+  <img src="{{ url_for('static', filename='images/accommodation.jpg') }}" alt="Food and Bev Banner">
+  <div class="banner-text">
+    <h1>Food and Bev</h1>
+  </div>
+</section>
+
+<!-- Food & Beverage Section -->
+<section class="food-and-beverage">
+  <h2>Dining at Fonteyn Holiday Park – A Taste for Every Mood!</h2>
+
+  <div class="food-and-beverage-cards-container">
+
+    <!-- Card 1 -->
+    <div class="card">
+      <div class="card-header">
+        <h3>The Family Spot – Casual & Kid-Friendly</h3>
+      </div>
+      <p>A warm and welcoming family restaurant, perfect for a relaxed meal with the kids.</p>
+      <ul>
+        <li>Casual dining with a cozy atmosphere.</li>
+        <li>Comfort food favorites – Pizza, pasta, burgers, and fresh salads.</li>
+        <li>Kids’ play corner & coloring menus.</li>
+        <li>Theme nights like Pancake Party Tuesdays and Build-Your-Own Pizza Fridays!</li>
+      </ul>
+      <div class="card-buttons">
+        <a href="/staticCustomers/gallery/mn1.1.png" download class="menu-button">📋 View Menu</a>
+        <a href="/reserve_table" class="book-button">Book a Table</a>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="card">
+      <div class="card-header">
+        <h3>The Grill House – Rustic & Hearty</h3>
+      </div>
+      <p>For those who love big flavors and a hearty meal.</p>
+      <ul>
+        <li>Grilled meats, ribs, steaks, and BBQ specials cooked to perfection.</li>
+        <li>Vegetarian & grilled veggie options available.</li>
+        <li>Local craft beers and homemade sauces for the ultimate BBQ experience.</li>
+        <li>Lodge-style interior with a warm and rustic ambiance.</li>
+      </ul>
+      <div class="card-buttons">
+        <a href="/staticCustomers/gallery/mn2.1.png" download class="menu-button">📋 View Menu</a>
+        <a href="/reserve_table" class="book-button">Book a Table</a>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="card">
+      <div class="card-header">
+        <h3>The Bay View – Elegant Dining with a View</h3>
+      </div>
+      <p>A romantic, modern restaurant with lakefront dining.</p>
+      <ul>
+        <li>Seafood, sushi, and Mediterranean-inspired dishes.</li>
+        <li>Fresh, local ingredients and gourmet flavors.</li>
+        <li>Elegant ambiance with candlelit tables and sunset views.</li>
+        <li>Perfect for couples, special occasions, or a fancy dinner out.</li>
+      </ul>
+      <div class="card-buttons">
+        <a href="/staticCustomers/gallery/mn3.1.png" download class="menu-button">📋 View Menu</a>
+        <a href="/reserve_table" class="book-button">Book a Table</a>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="card">
+      <div class="card-header">
+        <h3>The Lake Bar – Chill Drinks & Snacks</h3>
+      </div>
+      <p>The perfect spot to unwind by the water with a drink in hand.</p>
+      <ul>
+        <li>Cocktails, mocktails, and refreshing drinks.</li>
+        <li>Light snacks, tapas, and finger foods.</li>
+        <li>Live music or DJ sets on selected evenings.</li>
+        <li>Relaxing lounge seating with sunset views.</li>
+      </ul>
+      <div class="card-buttons">
+        <a href="/staticCustomers/gallery/mn4.1.png" download class="menu-button">📋 View Menu</a>
+        </div>
+    </div>
+
+  </div>
+
+  <p style="text-align: center; color: #777; margin-top: 2rem;">
+    All our restaurants are located together in the park’s central Food Court for easy access and a cozy atmosphere.
+  </p>
+</section>
+
+{% endblock %}

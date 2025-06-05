@@ -1,0 +1,19 @@
+FROM python:latest
+
+WORKDIR /frontendcustomers
+
+COPY customers_app.py .
+COPY staticCustomers/ ./staticCustomers
+COPY templatesCustomers/ ./templatesCustomers
+COPY requirements.txt .
+COPY config.ini .
+COPY config.py .
+COPY .env .env
+
+RUN pip install --no-cache-dir --upgrade -r requirements.txt
+
+EXPOSE 5008
+
+ENV PYTHONUNBUFFERED=1
+
+CMD ["gunicorn", "-k", "eventlet", "-w", "1", "-b", "0.0.0.0:5008", "--access-logfile", "-", "--error-logfile", "-", "customers_app:app"]

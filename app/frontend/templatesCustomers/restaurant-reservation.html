@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Reserve a Table at Our Food Court</h1>
+
+  <form class="restaurant-form">
+    <label for="restaurant">Choose Restaurant</label>
+    <select id="restaurant" name="restaurant" required>
+      <option value="">-- Select --</option>
+      <option value="The Grill House">The Grill House</option>
+      <option value="The Family Spot">The Family Spot</option>
+      <option value="The Bay View">The Bay View</option>
+    </select>
+
+    <label for="reservationDate">Date</label>
+    <input type="date" id="reservationDate" name="reservationDate" required>
+
+    <label for="reservationTime">Time</label>
+    <input type="time" id="reservationTime" name="reservationTime" required>
+
+    <label for="guests">Number of People</label>
+    <input type="number" id="guests" name="guests" min="1" max="12" required>
+
+    <label for="cabinNumber">Your Cabin Number</label>
+    <input type="text" id="cabinNumber" name="cabinNumber" required>
+
+    <label for="notes">Special Requests (optional)</label>
+    <textarea id="notes" name="notes" rows="3" placeholder="Allergies, seating preference, etc."></textarea>
+
+    <button type="submit">Reserve Table</button>
+  </form>
+
+
+{% endblock %}

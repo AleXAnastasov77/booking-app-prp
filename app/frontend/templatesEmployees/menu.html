@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Tailwind CSS CDN (assuming you use Tailwind based on your uploaded file) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Optional: Font Awesome for icons (based on your original style) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-100 flex min-h-screen">
+
+    <!-- Sidebar -->
+    <aside class="w-64 bg-gray-900 text-white flex flex-col p-6 space-y-4">
+        <h1 class="text-2xl font-bold mb-6">Dashboard</h1>
+        <nav class="flex flex-col space-y-2">
+            <a href="/" class="hover:bg-gray-700 px-3 py-2 rounded">🏠 Home</a>
+            <a href="/create-user" class="hover:bg-gray-700 px-3 py-2 rounded">➕ Create User</a>
+            <a href="/users" class="hover:bg-gray-700 px-3 py-2 rounded">👥 Users</a>
+            <a href="/bookings" class="hover:bg-gray-700 px-3 py-2 rounded">📅 Bookings</a>
+            <a href="/create-booking" class="hover:bg-gray-700 px-3 py-2 rounded">📝 Create Booking</a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-8 overflow-auto">
+        <div class="max-w-7xl mx-auto">
+            {% block content %}
+            <!-- Dynamic content gets injected here -->
+            {% endblock %}
+        </div>
+    </main>
+
+</body>
+</html>

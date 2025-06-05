@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- Hero Banner -->
+<section class="hero-banner">
+  <img src="{{ url_for('static', filename='images/accommodation.jpg') }}" alt="Accommodation Banner">
+  <div class="banner-text">
+    <h1>Germany Accomodations</h1>
+</div>
+</section>
+
+<!-- Description Section -->
+<section class="description">
+    <h2>Foneyn Holiday Park – Germany 🇩🇪✨</h2>
+    <p>Welcome to our scenic German escape, nestled near rolling hills and serene forests! Foneyn Germany offers the perfect blend of nature, comfort, and cultural charm for families, couples, and solo travelers alike.</p>
+    
+    <h3>🌲 What to Expect:</h3>
+    <ul class="expectations-list">
+      <li>Tranquil woodland surroundings – ideal for hikes, bike rides, and nature spotting 🚶‍♀️🚴‍♂️</li>
+      <li>Rustic lodges & cozy cabins – authentic charm meets modern comfort 🛖</li>
+      <li>Wellness & relaxation – enjoy saunas, spa facilities, and quiet lakeside moments 🧖‍♀️💧</li>
+    </ul>
+    
+    <p class="closing-statement">Whether you’re after a peaceful retreat or a cozy base to explore Germany’s natural beauty, Foneyn Holiday Park Germany has everything you need! 🌟</p>
+  </section>
+  
+
+<!-- Facility Section -->  
+<div class="facilities-container">
+  <div class="facility-card">
+    <img src="{{ url_for('static', filename='gallery/agm1.1.png') }}" alt="Family Cabin" class="facility-main-img">
+    <h3>Family Cabin</h3>
+    <p>Spacious and perfect for family getaways. Enjoy comfort, privacy, and beautiful nature right outside your door.</p>
+    
+    <!-- Trigger Button -->
+    <a href="#gallery-family" class="gallery-btn">View Gallery</a>
+  </div>
+  
+    <!-- Popup Modal Gallery -->
+    <div id="gallery-family" class="popup">
+      <div class="popup-content">
+        <a href="#" class="close-btn">&times;</a>
+        <div class="popup-images">
+          <img src="{{ url_for('static', filename='gallery/agm1.2.png') }}" alt="Family Cabin 1">
+          <img src="{{ url_for('static', filename='gallery/agm1.3.png') }}" alt="Family Cabin 2">
+          <img src="{{ url_for('static', filename='gallery/agm1.4.png') }}" alt="Family Cabin 3">
+          <img src="{{ url_for('static', filename='gallery/agm1.5.png') }}" alt="Family Cabin 4">
+          <img src="{{ url_for('static', filename='gallery/agm1.6.png') }}" alt="Family Cabin 5">
+          
+        </div>
+      </div>
+    </div>
+  
+  
+    <!-- Log Cabin -->
+  <div class="facility-card">
+        <img src="{{ url_for('static', filename='gallery/agm2.1.png') }}" alt="Log Cabin" class="facility-main-img">
+        <h3>Log Cabin</h3>
+        <p>Rustic charm meets modern comfort. The Log Cabin is ideal for those who want a traditional holiday experience.</p>
+        <!-- Trigger Button -->
+    <a href="#gallery-log" class="gallery-btn">View Gallery</a>
+  </div>
+  
+    <!-- Popup Modal Gallery -->
+    <div id="gallery-log" class="popup">
+      <div class="popup-content">
+        <a href="#" class="close-btn">&times;</a>
+        <div class="popup-images">
+          <img src="{{ url_for('static', filename='gallery/agm2.2.png') }}" alt="Log Cabin 1">
+          <img src="{{ url_for('static', filename='gallery/agm2.3.png') }}" alt="Log Cabin 2">
+          <img src="{{ url_for('static', filename='gallery/agm2.4.png') }}" alt="Log Cabin 3">
+          <img src="{{ url_for('static', filename='gallery/agm2.5.png') }}" alt="Log Cabin 4">
+          <img src="{{ url_for('static', filename='gallery/agm2.6.png') }}" alt="Log Cabin 5">
+        </div>
+      </div>
+    </div>
+
+  <!-- Modern Cabin -->
+  <div class="facility-card">
+        <img src="{{ url_for('static', filename='gallery/agm3.1.png') }}" alt="Modern Cabin" class="facility-main-img">
+        <h3>Modern Cabin</h3>
+        <p>Stylish and smart. The Modern Cabin is great for those who love contemporary design and smart features.</p>
+        <!-- Trigger Button -->
+    <a href="#gallery-modern" class="gallery-btn">View Gallery</a>
+  </div>
+  
+    <!-- Popup Modal Gallery -->
+    <div id="gallery-modern" class="popup">
+      <div class="popup-content">
+        <a href="#" class="close-btn">&times;</a>
+        <div class="popup-images">
+          <img src="{{ url_for('static', filename='gallery/agm3.2.png') }}" alt="Modern Cabin 1">
+          <img src="{{ url_for('static', filename='gallery/agm3.3.png') }}" alt="Modern Cabin 2">
+          <img src="{{ url_for('static', filename='gallery/agm3.4.png') }}" alt="Modern Cabin 3">
+          <img src="{{ url_for('static', filename='gallery/agm3.5.png') }}" alt="Modern Cabin 4">
+          <img src="{{ url_for('static', filename='gallery/agm3.6.png') }}" alt="Modern Cabin 5">
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<!-- Booking Button -->
+<section class="booking">
+  <h2>Ready to Book?</h2>
+  <a href="/booking" class="cta-button">Book Your Stay</a>
+</section>
+
+
+{% endblock %}

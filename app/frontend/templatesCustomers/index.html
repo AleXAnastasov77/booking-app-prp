@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="hero-banner">
+    <img src="{{ url_for('static', filename='gallery/banner1.png') }}" alt="Holiday Park Banner">
+    <div class="banner-text">
+      <h1>Welcome to Fonteyn Holiday Parks</h1>
+      <p>Book your perfect family getaway in nature today</p>
+    </div>
+  </section>
+    <h2>Welcome to Fonteyn Holiday Parks!</h2>
+    <p>Discover your perfect getaway in the Netherlands, Germany, or Belgium. Book now for an unforgettable vacation with fun, comfort, and cozy vibes.</p>
+   
+    <section class="booking-bar">
+        <form action="/search" method="get">
+          <select name="location" required>
+            <option value="">Choose location</option>
+            <option value="netherlands">Netherlands</option>
+            <option value="germany">Germany</option>
+            <option value="belgium">Belgium</option>
+          </select>
+      
+          <input type="date" name="checkin" required>
+          <input type="date" name="checkout" required>
+      
+          <input type="number" name="guests" placeholder="Guests" min="1" required>
+      
+          <button type="submit">Search</button>
+        </form>
+      </section>
+
+      <!-- Park Links Section -->
+<section class="park-links">
+    <div class="park-card">
+      <a href="/accomodation.nl">
+        <img src="{{ url_for('static', filename='gallery/h.a1.png') }}" alt="Netherlands Park">
+        <div class="park-name">Netherlands</div>
+      </a>
+    </div>
+    
+    <div class="park-card">
+        <a href="/accomodation.bl">
+          <img src="{{ url_for('static', filename='gallery/h.a3.png') }}" alt="Belgium Park">
+          <div class="park-name">Belgium</div>
+        </a>
+      </div>
+    
+    <div class="park-card">
+      <a href="/accomodation.gm">
+        <img src="{{ url_for('static', filename='gallery/h.a2.png') }}" alt="Germany Park">
+        <div class="park-name">Germany</div>
+      </a>
+    </div>
+    
+    <!-- Explore More Section with Icons -->
+<section class="explore-fancy">
+    <h2>More to Explore</h2>
+    <div class="feature-cards">
+      <a href="/facilities" class="feature-card">
+        <div class="icon">🏊‍♀️</div>
+        <h3>Facilities</h3>
+        <p>Swimming pools, saunas, and playgrounds for all ages.</p>
+      </a>
+      <a href="/food" class="feature-card">
+        <div class="icon">🍽️</div>
+        <h3>Restaurants</h3>
+        <p>Cozy local dining, takeaway options, and family-friendly vibes.</p>
+      </a>
+      <a href="/info" class="feature-card">
+        <div class="icon">🎉</div>
+        <h3>And More</h3>
+!!!!!!!!!!!!!!!!!!!!!!!<p>Activities, bike rentals, events, and hidden gems to explore.</p>
+      </a>
+    </div>
+  </section>
+  
+  <!-- Guest Reviews Section -->
+<section class="guest-reviews">
+    <h2>🌟 What Our Guests Say</h2>
+    
+    <div class="review-container">
+      <div class="review">
+        <p>"A magical getaway! 🌿 We stayed in the family cabin, and the kids absolutely loved the playground and animation team! The lake was perfect for paddle boating, and the restaurants had something for everyone. Can't wait to come back!"</p>
+        <p class="review-author">– Sophie & Mark, Netherlands</p>
+      </div>
+  
+      <div class="review">
+        <p>"Peaceful and beautiful." 🌅 We booked the log cabin for a quiet couples’ retreat, and it was exactly what we needed. The surroundings were breathtaking, and we loved having breakfast on our private balcony with a view of the lake.</p>
+        <p class="review-author">– Emma & Lucas, Belgium</p>
+      </div>
+  
+      <div class="review">
+        <p>"The perfect mix of nature and comfort!" 🏡 We loved staying in the modern cabin—it had everything we needed, and the Wi-Fi was great for a little remote work before fully unplugging! The food at the lake bar was delicious, and the sunsets were stunning.</p>
+        <p class="review-author">– Johan, Germany</p>
+      </div>
+  
+      <div class="review">
+        <p>"So much fun for the whole family!" 🎡 Between the animation team’s daily activities, the lake, and the evening parties, there was never a dull moment. The kids had a blast, and we actually got to relax. Definitely coming back next year!</p>
+        <p class="review-author">– Maria & family, Spain</p>
+      </div>
+  
+      <div class="review">
+        <p>"Great food, great vibes!" 🍽️ The restaurants here are amazing! We tried all three, and each had a unique menu. Plus, the lake bar cocktails at sunset? Absolutely perfect!</p>
+        <p class="review-author">– Lena, France</p>
+      </div>
+    </div>
+  
+     </section>
+  
+  
+    
+  </section>
+  
+{% endblock %}

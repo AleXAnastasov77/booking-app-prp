@@ -1,0 +1,17 @@
+
+/root/backup.sh: line 2: $'\r': command not found
+/root/backup.sh: line 3: $'\r': command not found
+/root/backup.sh: line 11: $'\r': command not found
+/root/backup.sh: line 12: $'\r': command not found
+/root/backup.sh: line 15: $'\r': command not found
+/root/backup.sh: line 16: $'\r': command not found
+/root/backup.sh: line 17: syntax error near unexpected token `$'{\r''
+/root/backup.sh: line 17: `check_mysql_connection() {'
+/root/backup.sh: line 2: $'\r': command not found
+/root/backup.sh: line 3: $'\r': command not found
+/root/backup.sh: line 11: $'\r': command not found
+/root/backup.sh: line 12: $'\r': command not found
+/root/backup.sh: line 15: $'\r': command not found
+/root/backup.sh: line 16: $'\r': command not found
+/root/backup.sh: line 17: syntax error near unexpected token `$'{\r''
+/root/backup.sh: line 17: `check_mysql_connection() {'

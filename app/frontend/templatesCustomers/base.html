@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fonteyn Holiday Parks</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-X..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body>
+    <header>
+        <div class="header">
+            <a href="/" class="logo">
+                <img src="{{ url_for('static', filename='gallery/logo.png') }}" alt="Fonteyn Logo">
+              </a>
+              
+      
+          <!-- Hidden checkbox toggle -->
+          <input type="checkbox" id="menu-toggle" class="menu-toggle">
+          <label for="menu-toggle" class="icon">&#9776;</label>
+      
+          <div class="header-right" id="navLinks">
+            <div class="dropdown">
+                <button class="dropbtn">Accommodations</button>
+                <div class="dropdown-content">
+                  <a href="/accomodation.nl">Netherlads Park</a>
+                  <a href="/accomodation.bl">Belgium Park</a>
+                  <a href="/accomodation.gm">Germany Park</a>
+                </div>
+              </div>
+            <a href="/facilities">Facilities</a>
+            <a href="/food">Food & Beverages</a>
+            <a href="/info">Info</a>
+            <a href="/login">Log In</a>
+            <a class="active" href="/booking">Book now</a>
+          </div>
+        </div>
+      </header>
+      
+
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-container">
+    
+        <!-- Navigation Links -->
+        <div class="footer-section">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/accomodation.nl">Accommodation Netherlands</a></li>
+            <li><a href="/accomodation.bl">Accommodation Belgium</a></li>
+            <li><a href="/accomodation.gm">Accommodation Germany</a></li>
+            <li><a href="/food">Food & Beverage</a></li>
+            <li><a href="/facilities">Facilities</a></li>
+            <li><a href="/info">Imformation</a></li>
+          </ul>
+        </div>
+    
+        <!-- Questions Section -->
+        <div class="footer-section">
+          <h4>Questions?</h4>
+          <p>Need help with your booking or stay?</p>
+          <p>Email us at <a href="mailto:info@fonteynpark.com">info@fonteynpark.com</a></p>
+          <p>Or call us:</p>
+          <p>Netherlands Park: +31 123 456 789</p>
+          <p>Belgium Park: +32 123 456 789</p>
+          <p>Germany Park: +49 123 456 789</p>
+        </div>
+    
+        <!-- Social Media -->
+        <div class="footer-section">
+          <h4>Follow Us</h4>
+          <div class="social-icons">
+            <a href="https://www.instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.tiktok.com" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+          </div>
+        </div>
+    
+      </div>
+    
+      <div class="footer-bottom">
+        <p>&copy; 2025 Fonteyn Holiday Park. All rights reserved.</p>
+      </div>
+    </footer>
+    
+</body>
+</html>

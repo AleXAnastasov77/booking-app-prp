@@ -1,0 +1,13 @@
+FROM alpine:latest
+
+WORKDIR /root
+
+RUN apk update && apk add --no-cache mariadb-connector-c mysql-client bash curl dcron
+
+COPY backup.sh /root/backup.sh
+RUN chmod +x /root/backup.sh && mkdir -p /root/log && touch /root/log/backup.log
+
+RUN echo '* * * * * /bin/bash /root/backup.sh >> /root/log/backup.log 2>&1' > /etc/crontabs/root
+
+
+CMD crond && tail -f /root/log/backup.log

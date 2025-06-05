@@ -1,0 +1,282 @@
+openapi: 3.0.0
+info:
+  title: Bookings API
+  version: 1.0.0
+  description: API for users to handle their bookings and parking
+
+
+paths:
+  /register:
+    post:
+      summary: Sign up a new user
+      operationId: api.post_register
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserRegister"
+      responses:
+        "201":
+          description: User created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RegisterResponse"
+        "400":
+          description: Missing stuff
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /login:
+    post:
+      summary: Login
+      operationId: api.post_login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - email
+              - password
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: "Login successful"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  user_id:
+                    type: string
+        '401':
+          description: "Invalid credentials or missing API key"
+        '400':
+          description: "Bad request (e.g., missing email or password)"
+
+  /me:
+    get:
+      summary: List your bookings
+      operationId: api.get_me
+      responses:
+        "200":
+          description: Your bookings
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Booking"
+
+  /:
+    post:
+      summary: Book a parking spot
+      operationId: api.post_root
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BookingRequest"
+      responses:
+        "201":
+          description: Parking booked
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BookingResponse"
+
+  /{id}:
+    delete:
+      summary: Cancel your parking booking
+      operationId: api.delete_id
+      parameters:
+        - $ref: "#/components/parameters/id"
+      responses:
+        "200":
+          description: Booking canceled
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageResponse"
+        "403":
+          description: Not your booking
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /parking:
+    get:
+      summary: List available parking spots
+      operationId: api.get_parking
+      responses:
+        "200":
+          description: List of parking spots
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ParkingSpot"
+
+  /parking/{id}:
+    delete:
+      summary: Cancel your parking reservation
+      operationId: api.delete_parking_id
+      parameters:
+        - $ref: "#/components/parameters/parking_id"
+      responses:
+        "200":
+          description: Parking reservation canceled
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageResponse"
+        "403":
+          description: Not your reservation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+components:
+  schemas:
+    UserRegister:
+      type: object
+      required:
+        - first_name
+        - last_name
+        - email
+        - password
+        - phone
+      properties:
+        firstName:
+          type: string
+          example: Ege
+        lastName:
+          type: string
+          example: Ramadanov
+        email:
+          type: string
+          format: email
+          example: ege.ramadanov@gmail.com
+        password:
+          type: string
+          format: password
+          example: secret123
+        phone:
+          type: string
+          pattern: '^\+?[1-9]\d{1,14}$'
+          example: "+315551234567"
+    UserLogin:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          format: email
+          example: ege.ramadanov@gmail.com
+        password:
+          type: string
+          format: password
+          example: secret123
+    LoginResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI...
+    RegisterResponse:
+      type: object
+      properties:
+        userId:
+          type: string
+          example: "eramadanov"
+    BookingRequest:
+      type: object
+      required:
+        - accommodationId
+        - date
+      properties:
+        accommodationId:
+          type: string
+          example: "acc_789"
+        date:
+          type: string
+          format: date
+          example: "2025-05-01"
+    BookingResponse:
+      type: object
+      properties:
+        bookingId:
+          type: string
+          example: "book_456"
+    Booking:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "book_456"
+        accommodationId:
+          type: string
+          example: "acc_789"
+        date:
+          type: string
+          format: date
+          example: "2025-05-01"
+    ParkingSpot:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "park_321"
+        name:
+          type: string
+          example: "Main Parking"
+        location:
+          type: string
+          example: "Park parking"
+    MessageResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Booking successfully canceled"
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Invalid credentials or missing data"
+
+  parameters:
+    id:
+      name: "id"
+      in: path
+      required: true
+      description: "ID of the booking or parking"
+      schema:
+        type: string
+        example: "book_456"
+    parking_id:
+      name: "id"
+      in: path
+      required: true
+      description: "ID of the parking reservation"
+      schema:
+        type: string
+        example: "park_321"
+

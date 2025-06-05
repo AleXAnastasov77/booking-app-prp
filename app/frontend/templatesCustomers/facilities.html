@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- Hero Banner -->
+<section class="hero-banner">
+  <img src="{{ url_for('static', filename='images/accommodation.jpg') }}" alt="Facilities Banner">
+  <div class="banner-text">
+    <h1>Facilities</h1>
+</div>
+</section>
+
+<section class="lakeside-fun-section">
+    <h2>🌊 Lakeside Fun</h2>
+    <p>Enjoy our scenic lake with exciting activities and a relaxing beachside atmosphere!</p>
+    
+    <div class="fun-cards-container">
+      <!-- Beach Card -->
+      <div class="fun-card">
+        <img src="/static/images/fun/beach.jpg" alt="Sandy Beach" class="fun-image">
+        <h3>🏖️ Sandy Beach & Swimming</h3>
+        <p>Relax on our soft sandy beach, enjoy safe swimming areas, and soak up the sun. Lifeguards on duty for peace of mind!</p>
+      </div>
+  
+      <!-- Boats Card -->
+      <div class="fun-card">
+        <img src="/static/images/fun/boats.jpg" alt="Rowboats and Paddleboats" class="fun-image">
+        <h3>🚣‍♂️ Rowboats & Paddleboats</h3>
+        <p>Take a peaceful ride or challenge your friends to a race! Boats are available for rent daily from our lakeside dock.</p>
+      </div>
+    </div>
+  </section>
+  
+  <section class="kids-fun-section">
+    <h2>🎠 Kids’ Corner – Adventure for the Little Ones!</h2>
+    <p>A world of fun, games, and creativity—just for kids! Whether it’s indoors or out, your little adventurers will be in good hands with our amazing animation team.</p>
+  
+    <div class="fun-cards-container">
+      <!-- Playground Card -->
+      <div class="fun-card">
+        <img src="/static/images/fun/playground.jpg" alt="Kids Playground" class="fun-image">
+        <h3>🛝 The Playground</h3>
+        <p>Climbing frames, slides, swings, and a mini adventure park make the playground the ultimate outdoor hangout spot!</p>
+      </div>
+  
+      <!-- Indoor Playroom Card -->
+      <div class="fun-card">
+        <img src="/static/images/fun/kidsroom.jpg" alt="Kids Playroom" class="fun-image">
+        <h3>🎨 Indoor Kids’ Room</h3>
+        <p>A cozy space packed with toys, board games, arts & crafts, and even storytime sessions. Perfect for creative play during mornings and afternoons!</p>
+      </div>
+  
+      <!-- Animation Team & Weekly Program Card -->
+      <div class="fun-card">
+        <img src="/static/images/fun/animation.jpg" alt="Animation Team" class="fun-image">
+        <h3>🎉 Animation Team & Theme Days</h3>
+        <p>Our fun-loving animation team leads exciting daily adventures! Look out for their bright shirts and join the fun:</p>
+        <div class="map-downloads">
+          <p>📥 Download the Kids Week Program:</p>
+          <ul>
+          🗓️ Full Weekly Plan – <a href="/staticCustomers/downloads/kids_club_program.png" download>Download Here</a>
+          </ul>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+  
+  <section class="evening-fun-section">
+    <h2>🌙 Evening Fun with the Animation Team!</h2>
+    <p>The fun doesn’t stop when the sun sets! Our animation team hosts amazing themed evening events to keep the whole family entertained under the stars.</p>
+  
+    <div class="fun-cards-container">
+      <!-- Welcome Party & Karaoke Night -->
+      <div class="fun-card">
+        <img src="/static/images/events/welcome-karaoke.jpg" alt="Welcome Party & Karaoke" class="fun-image">
+        <h3>🎤 Welcome Party & Karaoke Night</h3>
+        <p>Kick off the week with a fun welcome party and sing your heart out with family-friendly karaoke. Special “Kids’ Hour” followed by an adults-only round!</p>
+      </div>
+  
+      <!-- Campfire & Marshmallow Night -->
+      <div class="fun-card">
+        <img src="/static/images/events/campfire-marshmallow.jpg" alt="Campfire & Marshmallow Night" class="fun-image">
+        <h3>🔥 Campfire & Marshmallow Night</h3>
+        <p>Gather around a cozy bonfire by the lake. Roast marshmallows, enjoy DIY s’mores, and listen to acoustic tunes or fun fairy tales!</p>
+      </div>
+  
+      <!-- Glow Party & Mini Disco -->
+      <div class="fun-card">
+        <img src="/static/images/events/glow-party.jpg" alt="Glow Party & Mini Disco" class="fun-image">
+        <h3>🪩 Glow Party & Mini Disco</h3>
+        <p>Get your glow on with neon lights, glow sticks, face painting, and a mini disco! Dance to a mix of kids' tunes and party classics.</p>
+      </div>
+  
+      <!-- Talent Show & Game Night -->
+      <div class="fun-card">
+        <img src="/static/images/events/talent-show.jpg" alt="Talent Show & Game Night" class="fun-image">
+        <h3>🎭 Talent Show & Game Night</h3>
+        <p>Show off your talents in a family-friendly talent show! Compete in games like charades, trivia, and more, with fun prizes for the winners.</p>
+      </div>
+  
+      <!-- Tropical Beach Party -->
+      <div class="fun-card">
+        <img src="/static/images/events/tropical-party.jpg" alt="Tropical Beach Party" class="fun-image">
+        <h3>🍹 Tropical Beach Party</h3>
+        <p>Feel the Hawaiian vibes with tiki torches, limbo contests, and tropical drinks. Fun games, dance-offs, and fire dancers will light up the night!</p>
+      </div>
+  
+      <!-- Movie Night Under the Stars -->
+      <div class="fun-card">
+        <img src="/static/images/events/movie-night.jpg" alt="Movie Night Under the Stars" class="fun-image">
+        <h3>🎥 Movie Night Under the Stars</h3>
+        <p>Enjoy an outdoor cinema experience with cozy seating and popcorn. Family-friendly films before 9 PM and classic movies for adults afterward.</p>
+      </div>
+  
+      <!-- Farewell Party & Live Music -->
+      <div class="fun-card">
+        <img src="/static/images/events/farewell-party.jpg" alt="Farewell Party & Live Music" class="fun-image">
+        <h3>🎊 Farewell Party & Live Music</h3>
+        <p>Celebrate the end of a fantastic week with live music, dancing, and a special slideshow of the best moments of the week at Foneyn Holiday Park!</p>
+      </div>
+    </div>
+  </section>
+  
+  
+  <section class="shops-fun-section">
+    <h2>🛍️ On-Site Shops – Everything You Need, Right Here!</h2>
+    <p>No need to leave the park! Grab a snack, pick out a new summer outfit, or stock up on essentials—all without leaving the fun behind!</p>
+  
+    <div class="fun-cards-container">
+      <!-- Food Shop Card -->
+      <div class="fun-card">
+        <img src="/static/images/fun/food-shop.jpg" alt="Mini Market" class="fun-image">
+        <h3>🥐 The Mini Market</h3>
+        <p>From fresh bread to tasty snacks and baby essentials, our mini market keeps your cabin stocked and your belly happy!</p>
+      </div>
+  
+      <!-- Clothing Shop Card -->
+      <div class="fun-card">
+        <img src="/static/images/fun/clothes-shop.jpg" alt="Beachwear and Fashion Shop" class="fun-image">
+        <h3>👙 Beach & Fashion Shop</h3>
+        <p>Forgot your swimsuit or want a new holiday look? Swing by for summer clothes, sunglasses, flip-flops, and fun souvenirs!</p>
+      </div>
+  
+      <!-- Pharmacy Card -->
+      <div class="fun-card">
+        <img src="/static/images/fun/pharmacy.jpg" alt="Park Pharmacy" class="fun-image">
+        <h3>💊 The Park Pharmacy</h3>
+        <p>For life’s little hiccups! Stocked with first aid, cold meds, mosquito spray, baby products, and more—just in case.</p>
+      </div>
+    </div>
+  </section>
+  
+  <section class="parking-fun-section">
+    <h2>🚗 Easy & Secure Parking</h2>
+    <p>Start your holiday stress-free! Our gated system and designated parking make arrival smooth and simple.</p>
+  
+    <div class="fun-cards-container">
+      <!-- Parking Card -->
+      <div class="fun-card">
+        <img src="/static/images/fun/parking.jpg" alt="Parking Area" class="fun-image">
+        <h3>🅿️ Hassle-Free Parking</h3>
+        <p>Every cabin has its own parking spot, plus extra spaces for guests with mobility needs near the reception. Well-lit and monitored, your car is in good hands!</p>
+      </div>
+  
+      <!-- Gate Info Card -->
+      <div class="fun-card">
+        <img src="/static/images/fun/gate.jpg" alt="Gated Entrance" class="fun-image">
+        <h3>🔐 Smooth Gated Entry</h3>
+        <p>Register your license plate when booking, and our smart gate opens automatically when you arrive—no need to stop or check in manually. Vacation mode: ON!</p>
+      </div>
+    </div>
+  </section>
+  
+
+
+
+
+  {% endblock %}

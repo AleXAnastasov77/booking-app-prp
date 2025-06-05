@@ -1,0 +1,15 @@
+Flask
+Flask-Cors
+Flask-SQLAlchemy
+connexion
+python-dotenv
+PyMySQL
+PyJWT
+gunicorn
+connexion==2.14.2
+swagger-ui-bundle==0.0.9
+mysql-connector-python
+eventlet>=0.24.1
+bcrypt
+azure-identity
+azure-keyvault-secrets

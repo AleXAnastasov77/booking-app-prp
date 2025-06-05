@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Book Your Stay at Fonteyn Holiday Park</h1>
+
+  <form id="bookingForm" class="booking-form">
+
+    <label for="country">Select Country</label>
+    <select id="country" name="country" required>
+      <option value="">-- Choose a country --</option>
+      <option value="Netherlands">Netherlands</option>
+      <option value="Germany">Germany</option>
+      <option value="Belgium">Belgium</option>
+    </select>
+
+    <label for="cabin">Select Cabin Type</label>
+    <select id="cabin" name="cabin" required>
+      <option value="">-- Choose a cabin type --</option>
+      <option value="Lakeview Deluxe">Lakeview Deluxe</option>
+      <option value="Forest Lodge">Forest Lodge</option>
+      <option value="Cozy Cabin">Cozy Cabin</option>
+    </select>
+
+    <label for="checkin">Check-in Date</label>
+    <input type="date" id="checkin" name="checkin" required>
+
+    <label for="checkout">Check-out Date</label>
+    <input type="date" id="checkout" name="checkout" required>
+
+    <label for="numPeople">Number of Guests</label>
+    <input type="number" id="numPeople" name="numPeople" min="1" max="8" required>
+
+    <div id="peopleInfo"></div>
+
+    <label for="contactName">Your Name</label>
+    <input type="text" id="contactName" name="contactName" required>
+
+    <label for="email">Email Address</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="phone">Phone Number</label>
+    <input type="tel" id="phone" name="phone" required>
+
+    <label>
+      <input type="checkbox" id="carCheck"> I will come by car
+    </label>
+
+    <div id="carDetails" class="hidden">
+      <label for="license">Car License Plate</label>
+      <input type="text" id="license" name="license">
+    </div>
+
+    <button type="submit">Submit Booking</button>
+
+  </form>
+
+
+
+
+
+{% endblock %}

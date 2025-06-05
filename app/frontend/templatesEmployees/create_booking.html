@@ -1,0 +1,48 @@
+{% extends "menu.html" %}
+
+{% block content %}
+<h2 class="text-2xl font-semibold mb-6 text-gray-800">Create Booking</h2>
+
+<form method="POST" class="bg-white shadow-md rounded p-6 space-y-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+            <label for="user_id" class="block text-gray-700 font-medium mb-1">User ID</label>
+            <input type="number" id="user_id" name="user_id" class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+        </div>
+
+        <div>
+            <label for="place_id" class="block text-gray-700 font-medium mb-1">Place ID</label>
+            <input type="number" id="place_id" name="place_id" class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+        </div>
+
+        <div>
+            <label for="start_date" class="block text-gray-700 font-medium mb-1">Start Date</label>
+            <input type="date" id="start_date" name="start_date" class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+        </div>
+
+        <div>
+            <label for="end_date" class="block text-gray-700 font-medium mb-1">End Date</label>
+            <input type="date" id="end_date" name="end_date" class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+        </div>
+
+        <div>
+            <label for="price_per_night" class="block text-gray-700 font-medium mb-1">Price per Night</label>
+            <input type="number" step="0.01" id="price_per_night" name="price_per_night" class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+        </div>
+
+        <div>
+            <label for="num_nights" class="block text-gray-700 font-medium mb-1">Number of Nights</label>
+            <input type="number" id="num_nights" name="num_nights" class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+        </div>
+    </div>
+
+    <div class="flex justify-start gap-4 mt-6">
+        <button type="submit" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded shadow">
+            Create
+        </button>
+        <a href="/bookings" class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-6 py-2 rounded shadow">
+            Cancel
+        </a>
+    </div>
+</form>
+{% endblock %}

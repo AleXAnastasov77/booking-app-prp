@@ -1,0 +1,37 @@
+{% extends "menu.html" %}
+
+{% block content %}
+<h2>Bookings List</h2>
+
+<table class="table table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>User ID</th>
+            <th>Place ID</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Price/Night</th>
+            <th>Num Nights</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for booking in bookings %}
+        <tr>
+            <td>{{ booking.id }}</td>
+            <td>{{ booking.user_id }}</td>
+            <td>{{ booking.place_id }}</td>
+            <td>{{ booking.start_date }}</td>
+            <td>{{ booking.end_date }}</td>
+            <td>{{ booking.price_per_night }}</td>
+            <td>{{ booking.num_nights }}</td>
+            <td>
+                <a href="/edit-booking/{{ booking.id }}" class="btn btn-sm btn-primary">Edit</a>
+                <a href="/delete-booking/{{ booking.id }}" class="btn btn-sm btn-danger" onclick="return confirm('Delete this booking?')">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

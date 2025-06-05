@@ -1,0 +1,44 @@
+services:
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "5006:5006"
+  adminfrontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.employees
+    ports:
+      - "5007:5007"
+    depends_on:
+      - api
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.customers
+    ports:
+      - "5008:5008"
+    depends_on:
+      - api
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "80:80"
+    depends_on:
+      - frontend
+      - adminfrontend
+      - api
+  # mysql-backup:
+  #   build:
+  #     context: ./backend
+  #     dockerfile: Dockerfile.backup
+  #   env_file:
+  #     - ./backend/.env
+  #   volumes:
+  #     - ./backup:/root/backup
+  #     - ./log:/root/log
+  #   restart: always
+  #   network_mode: host

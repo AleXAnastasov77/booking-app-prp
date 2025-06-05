@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- Hero Banner -->
+<section class="hero-banner">
+  <img src="{{ url_for('static', filename='images/accommodation.jpg') }}" alt="Info Banner">
+  <div class="banner-text">
+    <h1>Information</h1>
+</div>
+</section>
+
+
+<section class="info-page">
+
+    <!-- History Section -->
+    <h2>🌿 The History of Fonteyn Holiday Park</h2>
+    <p>
+      Fonteyn Holiday Park began its journey in the 1980s, with a vision to create a cozy, family-friendly escape in the heart of the Netherlands.
+      What started as a small lakeside retreat quickly grew into a beloved destination for families, nature lovers, and adventure seekers alike.
+    </p>
+    <p>
+      Due to its success, Fonteyn expanded 10 years later, opening new parks in Belgium and Germany, each carefully designed to reflect the beauty and charm of its surroundings.
+      Today, the Fonteyn Holiday Parks continue to offer a perfect mix of relaxation, fun, and nature, welcoming guests from all over Europe.
+    </p>
+  
+    <!-- Team Section -->
+    <h2>👋 Meet the Team – The People Behind Fonteyn Holiday Park</h2>
+    <p>At Fonteyn Holiday Park, our team is made up of friendly and dedicated people who love creating amazing holiday experiences.</p>
+    <ul>
+      <li>🏡 <strong>Park Managers</strong> – Oversee daily operations and ensure guests are happy.</li>
+      <li>🎭 <strong>Animation & Activities Team</strong> – Plan and run all the fun events.</li>
+      <li>🛶 <strong>Outdoor Adventure Guides</strong> – Help guests explore the lake, hike, or paddleboard.</li>
+      <li>🍽️ <strong>Restaurant & Bar Staff</strong> – Make every meal memorable with great service and food.</li>
+      <li>🛏️ <strong>Housekeeping & Maintenance</strong> – Keep cabins clean and in tip-top shape.</li>
+      <li>🏪 <strong>Shopkeepers</strong> – Run the grocery store, boutique, and pharmacy.</li>
+      <li>💁 <strong>Reception & Guest Services</strong> – Help with check-ins and guest needs.</li>
+    </ul>
+  
+    <!-- Contact Section -->
+    <h2>📞 Contact Us – We’re Here to Help!</h2>
+    <h3>📍 Visit Us</h3>
+    <ul>
+      <li>🇳🇱 Fonteyn Netherlands – [Address Here]</li>
+      <li>🇧🇪 Fonteyn Belgium – [Address Here]</li>
+      <li>🇩🇪 Fonteyn Germany – [Address Here]</li>
+    </ul>
+    <h3>📧 Get in Touch</h3>
+    <p>📞 Phone: +[Phone Number]</p>
+    <p>📩 Email: <a href="mailto:contact@fonteynholidaypark.com">contact@fonteynholidaypark.com</a></p>
+    <h3>🕒 Customer Service Hours</h3>
+    <p>Monday – Friday: 08:00 – 20:00<br>Saturday – Sunday: 09:00 – 18:00</p>
+  
+    <!-- Social Media -->
+    <h3>📲 Follow Us on Social Media!</h3>
+    <p>
+      📸 Instagram: <a href="#">@fonteynholidaypark</a><br>
+      📘 Facebook: <a href="#">Fonteyn Holiday Park</a><br>
+      🐦 Twitter: <a href="#">@fonteynpark</a>
+    </p>
+  
+    <!-- Events Section -->
+    <h2>🎉 Schedule Your Special Event with Us!</h2>
+    <p>Looking for the perfect location for your next celebration? We’ve got you covered with lakeside views and unforgettable experiences!</p>
+    <ul>
+      <li>✅ Scenic Locations – Celebrate surrounded by nature</li>
+      <li>✅ Custom Packages – Tailored for any size or vibe</li>
+      <li>✅ Fun Activities – Games, lake sports, and entertainment</li>
+      <li>✅ Delicious Catering – Choose our menu or request custom meals</li>
+    </ul>
+    <p>📅 Ready to plan your event?<br>
+      📩 Email: <a href="mailto:events@fonteynholidaypark.com">events@fonteynholidaypark.com</a><br>
+      📞 Phone: +[Your Phone Number]</p>
+  
+    <!-- Maps Section -->
+    <h2>🗺️ Find Your Way Around – Park Maps</h2>
+    <p>Use our park maps to explore everything Fonteyn has to offer – from cabins to event zones!</p>
+    <ul>
+      <li>✅ Accommodation Areas – Locate your cabin easily</li>
+      <li>✅ Facilities – Restaurants, shops, reception, and more</li>
+      <li>✅ Activity Zones – Playgrounds, hiking trails, lakes</li>
+      <li>✅ Entertainment Spots – Where the magic happens daily</li>
+    </ul>
+    <div class="map-downloads">
+        <p>📲 Download the map for your park location:</p>
+        <ul>
+          <li>🇳🇱 Netherlands Park Map – <a href="/staticCustomers/downloads/fonteyn-nl-map.png" download>Download Here</a></li>
+          <li>🇧🇪 Belgium Park Map – <a href="/staticCustomers/downloads/fonteyn-nl-map.png" download>Download Here</a></li>
+          <li>🇩🇪 Germany Park Map – <a href="/staticCustomers/downloads/fonteyn-nl-map.png" download>Download Here</a></li>
+        </ul>
+    </div>
+    <p>📍 Printed copies available at reception – or just ask our team if you’re lost!</p>
+  
+  </section>
+  
+  
+
+{% endblock %}

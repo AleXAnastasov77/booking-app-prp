@@ -1,0 +1,326 @@
+openapi: 3.0.0
+info:
+  title: Admin API
+  version: 1.0.0
+  description: API for admins to manage users, accommodations, bookings, payments, and more.
+servers:
+  - url: "/admin"
+
+
+paths:
+  /users:
+    get:
+      summary: List all users
+      operationId: admin_api.get_users
+  
+      responses:
+        "200":
+          description: List of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UserBasic"
+    post:
+      summary: Create a new user
+      operationId: admin_api.post_users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserCreate"
+      responses:
+        "201":
+          description: User created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserCreated"
+
+  /users/{id}:
+    put:
+      summary: Update an existing user
+      operationId: admin_api.put_users_id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the user to update
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserUpdate"
+      responses:
+        "200":
+          description: User updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageResponse"
+    delete:
+      summary: Delete an existing user
+      operationId: admin_api.delete_users_id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the user to delete
+          schema:
+            type: string
+      responses:
+        "200":
+          description: User deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageResponse"
+
+  /accommodations:
+    post:
+      summary: Create a new accommodation
+      operationId: admin_api.post_accommodations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccommodationCreate"
+      responses:
+        "201":
+          description: Accommodation created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccommodationCreated"
+
+  /accommodations/{id}:
+    put:
+      summary: Update an existing accommodation
+      operationId: admin_api.put_accommodations_id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the accommodation to update
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccommodationUpdate"
+      responses:
+        "200":
+          description: Accommodation updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageResponse"
+    delete:
+      summary: Delete an existing accommodation
+      operationId: admin_api.delete_accommodations_id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the accommodation to delete
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Accommodation deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageResponse"
+
+  /bookings:
+    get:
+      summary: List all bookings
+      operationId: admin_api.get_bookings
+      responses:
+        "200":
+          description: List of bookings
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BookingBasic"
+
+  /bookings/{id}:
+    put:
+      summary: Update an existing booking
+      operationId: admin_api.put_bookings_id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the booking to update
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BookingUpdate"
+      responses:
+        "200":
+          description: Booking updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageResponse"
+    delete:
+      summary: Delete an existing booking
+      operationId: admin_api.delete_bookings_id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the booking to delete
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Booking canceled
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageResponse"
+
+components:
+  schemas:
+    UserBasic:
+      type: object
+      properties:
+        user_id:
+          type: string
+          description: Unique identifier for the user
+        name:
+          type: string
+          description: Name of the user
+        email:
+          type: string
+          description: Email address of the user
+        phone_number:
+          type: string
+          description: Phone number of the user
+        role:
+          type: string
+          description: Role of the user (admin, customer)
+
+    UserCreate:
+      type: object
+      required:
+        - name
+        - email
+        - hashed_password
+        - role
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        phone_number:
+          type: string
+        hashed_password:
+          type: string
+        role:
+          type: string
+          enum:
+            - customer
+            - admin
+
+    UserUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        phone_number:
+          type: string
+        email:
+          type: string
+        hashed_password:
+          type: string
+        role:
+          type: string
+          enum:
+            - customer
+            - admin
+
+    UserCreated:
+      type: object
+      properties:
+        user_id:
+          type: string
+          description: Unique identifier for the newly created user
+
+    AccommodationCreate:
+      type: object
+      required:
+        - name
+        - location
+      properties:
+        name:
+          type: string
+        location:
+          type: string
+
+    AccommodationUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        location:
+          type: string
+
+    AccommodationCreated:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the newly created accommodation
+
+    BookingBasic:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Booking ID
+        userId:
+          type: string
+          description: ID of the user making the booking
+        accommodationId:
+          type: string
+          description: ID of the accommodation being booked
+        date:
+          type: string
+          format: date
+          description: Date of the booking
+
+    BookingUpdate:
+      type: object
+      properties:
+        userId:
+          type: string
+        accommodationId:
+          type: string
+        date:
+          type: string
+          format: date
+
+    MessageResponse:
+      type: object
+      properties:
+        message:
+          type: string
+ 
