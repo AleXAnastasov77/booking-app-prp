@@ -6,15 +6,15 @@ data "azurerm_container_app" "api_current" {
   resource_group_name = azurerm_resource_group.booking_rg.name
 }
 
-data "azurerm_container_app" "frontend_current" {
-  name                = "booking-frontend"
-  resource_group_name = azurerm_resource_group.booking_rg.name
-}
+# data "azurerm_container_app" "frontend_current" {
+#   name                = "booking-frontend"
+#   resource_group_name = azurerm_resource_group.booking_rg.name
+# }
 
-data "azurerm_container_app" "admin_current" {
-  name                = "booking-admin"
-  resource_group_name = azurerm_resource_group.booking_rg.name
-}
+# data "azurerm_container_app" "admin_current" {
+#   name                = "booking-admin"
+#   resource_group_name = azurerm_resource_group.booking_rg.name
+# }
 
 resource "azurerm_resource_group" "booking_rg" {
   name     = var.resource_group_name
@@ -46,7 +46,7 @@ resource "azurerm_container_app" "booking_api" {
     container {
       name   = "fonteynapi"
       #image  = var.backend_image
-      image  = "${azurerm_container_registry.fonteyn_acr}/fonteyn-booking-app-api:1.0"
+      image  = "${azurerm_container_registry.fonteyn_acr.login_server}/fonteyn-booking-app-api:1.0"
       cpu    = 0.25
       memory = "0.5Gi"
     }
