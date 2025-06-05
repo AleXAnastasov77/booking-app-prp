@@ -91,15 +91,15 @@ variable "container_admin_name" {
 variable "backend_image" {
   description = "The image name of the backend"
   type        = string
-  default     = data.azurerm_container_app.api_current.template[0].container[0].image
+  default     = ""
 }
 variable "frontend_image" {
   description = "The image name of the frontend"
   type        = string
-  default     = data.azurerm_container_app.front_end_current.template[0].container[0].image
+  default     = ""
 }
 variable "admin_image" {
   description = "The image name of the admin frontend"
   type        = string
-  default     = data.azurerm_container_app.admin_current.template[0].container[0].image
+  default     = ""
 }
