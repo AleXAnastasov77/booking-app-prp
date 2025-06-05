@@ -103,3 +103,8 @@ variable "admin_image" {
   type        = string
   default     = ""
 }
+
+variable "GITHUB_SHA" {
+  description = "The commit SHA that triggered the workflow"
+  type        = string
+}

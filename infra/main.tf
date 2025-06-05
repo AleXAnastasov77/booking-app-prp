@@ -41,8 +41,8 @@ resource "azurerm_container_app" "booking_api" {
   template {
     container {
       name   = "fonteynapi"
-      #image  = var.backend_image
-      image  = "${azurerm_container_registry.fonteyn_acr.login_server}/fonteyn-booking-app-api:1.0"
+      image  = local.backend_image
+      #image  = "${azurerm_container_registry.fonteyn_acr.login_server}/fonteyn-booking-app-api:1.0"
       cpu    = 0.25
       memory = "0.5Gi"
     }
@@ -70,10 +70,10 @@ resource "azurerm_container_app" "booking_api" {
   depends_on = [azurerm_role_assignment.acr_pull, azurerm_role_assignment.github_acr_pull]
 }
 
-# data "azurerm_container_app" "api_current" {
-#   name                = "booking-api"
-#   resource_group_name = azurerm_resource_group.booking_rg.name
-# }
+data "azurerm_container_app" "api_current" {
+  name                = "booking-api"
+  resource_group_name = azurerm_resource_group.booking_rg.name
+}
 
 
 
