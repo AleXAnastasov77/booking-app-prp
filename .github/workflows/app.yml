@@ -64,14 +64,16 @@ jobs:
           docker push crfonteyn001.azurecr.io/fonteyn-booking-app-adminfrontend:${{ github.sha }}
 
       # 9. Trigger Terraform Infra Pipeline
-      - name: Trigger Terraform Pipeline
-        uses: peter-evans/repository-dispatch@v3
-        with:
-          token: ${{ secrets.REPO_DISPATCH_TOKEN }}  # Must be a PAT with repo scope
-          event-type: deploy-infra
-          client-payload: >-
-            {
-              "backend_image": "crfonteyn001.azurecr.io/fonteyn-booking-app-api:${{ github.sha }}",
-              "frontend_image": "crfonteyn001.azurecr.io/fonteyn-booking-app-frontend:${{ github.sha }}",
-              "admin_image": "crfonteyn001.azurecr.io/fonteyn-booking-app-adminfrontend:${{ github.sha }}"
-            }
+      - name: Trigger Infra Pipeline
+        run: |
+          curl -X POST https://api.github.com/repos/${{ github.repository }}/actions/workflows/infra-pipeline.yml/dispatches \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            -d '{
+                  "ref":"main",
+                  "inputs": {
+                    "backend_image": "crfonteyn001.azurecr.io/fonteyn-booking-app-api:${{ github.sha }}",
+                    "frontend_image": "crfonteyn001.azurecr.io/fonteyn-booking-app-frontend:${{ github.sha }}",
+                    "admin_image": "crfonteyn001.azurecr.io/fonteyn-booking-app-adminfrontend:${{ github.sha }}"
+                  }
+                }'
