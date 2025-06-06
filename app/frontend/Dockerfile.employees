@@ -15,6 +15,4 @@ RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
 EXPOSE 5007
 
-ENV PYTHONUNBUFFERED=1
-
 CMD ["gunicorn", "-k", "eventlet", "-w", "1", "-b", "0.0.0.0:5007","--access-logfile", "-", "--error-logfile", "-", "admin_app:app"]
