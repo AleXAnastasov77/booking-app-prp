@@ -6,17 +6,15 @@ import msal
 
 from flask import Flask, redirect, render_template, request, url_for
 from werkzeug.security import check_password_hash, generate_password_hash
+from dotenv import load_dotenv
 
+load_dotenv()
 app = Flask(__name__, static_folder="staticEmployees", template_folder="templatesEmployees")
 
 
-
-
-from werkzeug.security import check_password_hash
-
-CLIENT_ID = "98de4856-0f4e-4dc1-b378-30a538aa72f7"
-CLIENT_SECRET = "-RN8Q~m0iycYKuZ8qoDAyzCPHkrs8C.3SE2uyb3L"
-AUTHORITY = "https://login.microsoftonline.com/1bec2e8a-e0a3-41c3-953c-518997ab3677"
+CLIENT_ID = os.getenv("CLIENT_ID")
+CLIENT_SECRET = os.getenv("CLIENT_SECRET")
+AUTHORITY = os.getenv("AUTHORITY")
 REDIRECT_PATH = "/getAToken"
 SCOPE = ["User.Read"]
 
@@ -50,7 +48,7 @@ def authorized():
     )
     if "id_token_claims" in result:
         # You can access user info here, e.g.:
-        user_email = result["id_token_claims"].get("preferred_username")
+        #user_email = result["id_token_claims"].get("preferred_username")
         # Store user info in session, etc.     
         return redirect(url_for("index"))
     else:
@@ -91,8 +89,6 @@ def bookings():
 @app.route('/create-booking', methods=['GET', 'POST'])
 def create_booking():
     if request.method == 'POST':
-        start_date = datetime.strptime(request.form['start_date'], '%Y-%m-%d').date()
-        end_date = datetime.strptime(request.form['end_date'], '%Y-%m-%d').date()
 
         return redirect(url_for('bookings'))
 
