@@ -46,19 +46,21 @@ jobs:
       # 6. Build & Push Backend Image
       - name: Build & Push Backend (API)
         run: |
-          docker build -t crfonteyn001.azurecr.io/fonteyn-booking-app-api:${{ github.sha }} ./backend
+          docker build -t crfonteyn001.azurecr.io/fonteyn-booking-app-api:${{ github.sha }} app/backend
           docker push crfonteyn001.azurecr.io/fonteyn-booking-app-api:${{ github.sha }}
-
-      # 7. Build & Push Frontend Image
+      
+      # 7. Build and push frontend image
       - name: Build & Push Frontend
         run: |
-          docker build -t crfonteyn001.azurecr.io/fonteyn-booking-app-frontend:${{ github.sha }} ./frontend
+          docker build -t crfonteyn001.azurecr.io/fonteyn-booking-app-frontend:${{ github.sha }} \
+            -f app/Dockerfile.customers app
           docker push crfonteyn001.azurecr.io/fonteyn-booking-app-frontend:${{ github.sha }}
 
       # 8. Build & Push Admin Frontend Image
       - name: Build & Push Admin Frontend
         run: |
-          docker build -t crfonteyn001.azurecr.io/fonteyn-booking-app-adminfrontend:${{ github.sha }} ./admin
+          docker build -t crfonteyn001.azurecr.io/fonteyn-booking-app-adminfrontend:${{ github.sha }} \
+            -f app/Dockerfile.employees app
           docker push crfonteyn001.azurecr.io/fonteyn-booking-app-adminfrontend:${{ github.sha }}
 
       # 9. Trigger Terraform Infra Pipeline
