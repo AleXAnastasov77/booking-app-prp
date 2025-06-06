@@ -66,7 +66,7 @@ jobs:
       # 9. Trigger Terraform Infra Pipeline
       - name: Trigger Infra Pipeline
         run: |
-          curl -X POST https://api.github.com/repos/${{ github.repository }}/actions/workflows/infra-pipeline.yml/dispatches \
+          curl -X POST https://api.github.com/repos/${{ github.repository }}/actions/workflows/infra.yml/dispatches \
             -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
             -H "Accept: application/vnd.github.v3+json" \
             -d '{
