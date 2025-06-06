@@ -86,6 +86,7 @@ def bookings():
 
     return render_template('bookings.html', bookings)
 
+
 @app.route('/create-booking', methods=['GET', 'POST'])
 def create_booking():
     if request.method == 'POST':
@@ -93,7 +94,6 @@ def create_booking():
         return redirect(url_for('bookings'))
 
     return render_template('create_booking.html')
-
 
 
 if __name__ == '__main__':
