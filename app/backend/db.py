@@ -63,7 +63,7 @@ connection_pool = pooling.MySQLConnectionPool(
     port=int(os.getenv("DATABASE_PORT", 3306)),
     user=db_user,
     password=db_password,
-    database=os.getenv("DATABASE_NAME"),
+    database=CONFIG["azure_db"]["db_name"],
     ssl_ca=ca_cert_path
 )
 
