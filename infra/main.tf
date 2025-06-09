@@ -92,6 +92,14 @@ resource "azurerm_container_app" "booking_frontend" {
   resource_group_name          = azurerm_resource_group.booking_rg.name
   revision_mode                = "Single"
   tags                         = var.tags
+  dynamic "secret" {
+    for_each = local.secret_env_map
+    content {
+      name                = secret.value
+      key_vault_secret_id = data.azurerm_key_vault_secret.secrets[secret.key].id
+      identity            = azurerm_user_assigned_identity.booking_identity.id
+    }
+  }
 
   template {
     container {
@@ -102,6 +110,13 @@ resource "azurerm_container_app" "booking_frontend" {
       image  = "${azurerm_container_registry.fonteyn_acr.login_server}/fonteyn-booking-app-frontend:1.0"
       cpu    = 0.25
       memory = "0.5Gi"
+      dynamic "env" {
+        for_each = local.secret_env_var_map
+        content {
+          name        = env.value
+          secret_name = local.secret_env_map[env.key]
+        }
+      }
       env {
         name  = "API_URL"
         value = "https://${azurerm_container_app.booking_api.latest_revision_fqdn}"
@@ -142,7 +157,14 @@ resource "azurerm_container_app" "booking_admin" {
   resource_group_name          = azurerm_resource_group.booking_rg.name
   revision_mode                = "Single"
   tags                         = var.tags
-
+  dynamic "secret" {
+    for_each = local.secret_env_map
+    content {
+      name                = secret.value
+      key_vault_secret_id = data.azurerm_key_vault_secret.secrets[secret.key].id
+      identity            = azurerm_user_assigned_identity.booking_identity.id
+    }
+  }
   template {
     container {
       name = "fonteynadmin"
@@ -152,6 +174,13 @@ resource "azurerm_container_app" "booking_admin" {
       image  = "${azurerm_container_registry.fonteyn_acr.login_server}/fonteyn-booking-app-adminfrontend:1.0" 
       cpu    = 0.25
       memory = "0.5Gi"
+      dynamic "env" {
+        for_each = local.secret_env_var_map
+        content {
+          name        = env.value
+          secret_name = local.secret_env_map[env.key]
+        }
+      }
       env {
           name  = "API_URL"
           value = "https://${azurerm_container_app.booking_api.latest_revision_fqdn}"
