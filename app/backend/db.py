@@ -21,7 +21,7 @@ try:
 
         db_user = client.get_secret(username_secret_name).value
         db_password = client.get_secret(password_secret_name).value
-
+        db_host = CONFIG["azure_db"]["host"]
         ca_url = "https://dl.cacerts.digicert.com/DigiCertGlobalRootCA.crt.pem"
         response = requests.get(ca_url)
         response.raise_for_status()
@@ -34,6 +34,7 @@ except Exception as e:
     print("[INFO] Falling back to local .env values.")
     db_user = os.getenv("DB_USERNAME")
     db_password = os.getenv("DB_PASSWORD")
+    db_host = os.getenv("DATABASE_HOST")
     ca_cert_path = None  # or a local cert path
 
 # Always define connection_pool
@@ -41,7 +42,7 @@ connection_pool = pooling.MySQLConnectionPool(
     pool_name="mypool",
     pool_size=5,
     pool_reset_session=True,
-    host=CONFIG["azure_db"]["host"],
+    host=db_host,
     port=int(os.getenv("DATABASE_PORT", 3306)),
     user=db_user,
     password=db_password,
