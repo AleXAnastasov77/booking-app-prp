@@ -8,7 +8,7 @@ COPY templatesCustomers/ ./templatesCustomers
 COPY requirements.txt .
 COPY config.ini .
 COPY config.py .
-COPY .env .env
+#COPY .env .env
 
 RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
