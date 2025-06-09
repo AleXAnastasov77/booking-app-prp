@@ -36,7 +36,6 @@ except Exception as e:
     db_password = os.getenv("DB_PASSWORD")
     ca_cert_path = None  # or a local cert path
 
-
 # Always define connection_pool
 connection_pool = pooling.MySQLConnectionPool(
     pool_name="mypool",
