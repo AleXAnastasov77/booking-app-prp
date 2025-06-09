@@ -48,8 +48,8 @@ resource "azurerm_container_app" "booking_api" {
       dynamic "env" {
         for_each = local.secret_env_map
         content {
-          name        = environment_variable.value
-          secret_name = environment_variable.value
+          name        = env.value
+          secret_name = env.value
         }
       }
     }
