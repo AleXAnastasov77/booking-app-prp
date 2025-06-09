@@ -75,6 +75,6 @@ jobs:
             --resource-group rg-booking-prod-sweden-001 \
             --image crfonteyn001.azurecr.io/fonteyn-booking-app-frontend:${{ github.sha }}
           az containerapp update \
-            --name adminfrontend-booking-prod-sweden-001 \
+            --name admin-booking-prod-sweden-001 \
             --resource-group rg-booking-prod-sweden-001 \
             --image crfonteyn001.azurecr.io/fonteyn-booking-app-adminfrontend:${{ github.sha }}
