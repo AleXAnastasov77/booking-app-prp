@@ -22,17 +22,7 @@ resource "azurerm_key_vault_secret" "mysql_password" {
   key_vault_id = azurerm_key_vault.booking_keyvault.id
   value        = var.mysql_password
 }
-locals {
-  secret_env_map = {
-    "dbusernamesecret"  = "DB_USERNAME_SECRET"
-    "dbpasswordsecret"  = "DB_PASSWORD_SECRET"
-    "apikey"            = "API_KEY"
-    "secretkey"         = "SECRET_KEY"
-    "clientid"          = "CLIENT_ID"
-    "clientsecret"      = "CLIENT_SECRET"
-    "authority"         = "AUTHORITY"
-  }
-}
+
 data "azurerm_key_vault_secret" "secrets" {
   for_each     = local.secret_env_map
   name         = each.key

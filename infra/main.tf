@@ -27,28 +27,31 @@ resource "azurerm_container_app" "booking_api" {
   revision_mode                = "Single"
   tags                         = var.tags
 
+
+  dynamic "secret" {
+    for_each = local.secret_env_map
+    content {
+      name                = secret.value
+      key_vault_secret_id = data.azurerm_key_vault_secret.secrets[secret.key].id
+      identity            = azurerm_user_assigned_identity.booking_identity.id
+    }
+  }
+
+
+  dynamic "environment_variable" {
+    for_each = local.secret_env_map
+    content {
+      name        = environment_variable.value
+      secret_name = environment_variable.value
+    }
+  }
+
   template {
     container {
-      name  = "fonteynapi"
-      image = "${azurerm_container_registry.fonteyn_acr.login_server}/fonteyn-booking-app-api:1.0"
-      cpu   = 0.25
+      name   = "fonteynapi"
+      image  = "${azurerm_container_registry.fonteyn_acr.login_server}/fonteyn-booking-app-api:1.0"
+      cpu    = 0.25
       memory = "0.5Gi"
-
-    }
-  }
-  dynamic "secrets" {
-    for_each = local.secret_env_map
-    content {
-      name  = secrets.value
-      value = data.azurerm_key_vault_secret.secrets[secrets.key].value
-    }
-  }
-
-  dynamic "env" {
-    for_each = local.secret_env_map
-    content {
-      name        = env.value
-      secret_name = env.value
     }
   }
 
@@ -64,7 +67,6 @@ resource "azurerm_container_app" "booking_api" {
     traffic_weight {
       percentage      = 100
       latest_revision = true
-      revision_suffix = null
     }
   }
 
@@ -84,6 +86,7 @@ resource "azurerm_container_app" "booking_api" {
     azurerm_role_assignment.github_acr_pull
   ]
 }
+
 
 
 resource "azurerm_container_app" "booking_frontend" {
