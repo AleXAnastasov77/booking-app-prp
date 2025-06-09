@@ -63,17 +63,18 @@ jobs:
             -f app/frontend/Dockerfile.employees app/frontend
           docker push crfonteyn001.azurecr.io/fonteyn-booking-app-adminfrontend:${{ github.sha }}
 
-      # 9. Trigger Terraform Infra Pipeline
-      - name: Trigger Infra Pipeline
+      # 9. Update container app images
+      - name: Update Container App Images
         run: |
-          curl -X POST https://api.github.com/repos/${{ github.repository }}/actions/workflows/infra.yml/dispatches \
-            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-            -H "Accept: application/vnd.github.v3+json" \
-            -d '{
-                  "ref":"main",
-                  "inputs": {
-                    "backend_image": "crfonteyn001.azurecr.io/fonteyn-booking-app-api:${{ github.sha }}",
-                    "frontend_image": "crfonteyn001.azurecr.io/fonteyn-booking-app-frontend:${{ github.sha }}",
-                    "admin_image": "crfonteyn001.azurecr.io/fonteyn-booking-app-adminfrontend:${{ github.sha }}"
-                  }
-                }'
+          az containerapp update \
+            --name api-booking-prod-sweden-001 \
+            --resource-group rg-booking-prod-sweden-001 \
+            --image crfonteyn001.azurecr.io/fonteyn-booking-app-api:${{ github.sha }}
+          az containerapp update \
+            --name frontend-booking-prod-sweden-001 \
+            --resource-group rg-booking-prod-sweden-001 \
+            --image crfonteyn001.azurecr.io/fonteyn-booking-app-frontend:${{ github.sha }}
+          az containerapp update \
+            --name adminfrontend-booking-prod-sweden-001 \
+            --resource-group rg-booking-prod-sweden-001 \
+            --image crfonteyn001.azurecr.io/fonteyn-booking-app-adminfrontend:${{ github.sha }}
