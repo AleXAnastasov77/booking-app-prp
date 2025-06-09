@@ -39,7 +39,6 @@ try:
         db_user = client.get_secret(username_secret_name).value
         db_password = client.get_secret(password_secret_name).value
         db_host = CONFIG["azure_db"]["host"]
-
         ca_url = "https://dl.cacerts.digicert.com/DigiCertGlobalRootCA.crt.pem"
         response = requests.get(ca_url)
         response.raise_for_status()
