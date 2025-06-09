@@ -7,6 +7,14 @@ import requests
 from azure.identity import DefaultAzureCredential
 from azure.keyvault.secrets import SecretClient
 from config import CONFIG
+import logging
+import traceback
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+)
+logger = logging.getLogger(__name__)
 
 load_dotenv()
 
@@ -22,6 +30,7 @@ try:
         db_user = client.get_secret(username_secret_name).value
         db_password = client.get_secret(password_secret_name).value
         db_host = CONFIG["azure_db"]["host"]
+
         ca_url = "https://dl.cacerts.digicert.com/DigiCertGlobalRootCA.crt.pem"
         response = requests.get(ca_url)
         response.raise_for_status()
@@ -30,12 +39,17 @@ try:
             tmp_ca.write(response.content)
             ca_cert_path = tmp_ca.name
 except Exception as e:
-    print(f"[WARNING] Failed to load secrets from Azure: {e}")
-    print("[INFO] Falling back to local .env values.")
+    logger.error("[ERROR] Failed to load secrets from Azure Key Vault.")
+    logger.error(f"Exception type: {type(e).__name__}")
+    logger.error(f"Exception message: {e}")
+    logger.debug("Full traceback:\n" + traceback.format_exc())
+
+    print(f"[ERROR] Key Vault access failed: {e}")
+
     db_user = os.getenv("DB_USERNAME")
     db_password = os.getenv("DB_PASSWORD")
-    db_host = os.getenv("DATABASE_HOST")
-    ca_cert_path = None  # or a local cert path
+    db_host = os.getenv("DATABASE_HOST") or CONFIG["azure_db"]["host"]
+    ca_cert_path = None
 
 # Always define connection_pool
 connection_pool = pooling.MySQLConnectionPool(
