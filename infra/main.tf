@@ -1,8 +1,6 @@
 
 data "azurerm_client_config" "current" {}
 
-
-
 resource "azurerm_resource_group" "booking_rg" {
   name     = var.resource_group_name
   location = var.location
@@ -32,12 +30,28 @@ resource "azurerm_container_app" "booking_api" {
   template {
     container {
       name  = "fonteynapi"
-      image = local.backend_image
-      #image  = "${azurerm_container_registry.fonteyn_acr.login_server}/fonteyn-booking-app-api:1.0"
-      cpu    = 0.25
+      image = "${azurerm_container_registry.fonteyn_acr.login_server}/fonteyn-booking-app-api:1.0"
+      cpu   = 0.25
       memory = "0.5Gi"
+
+      dynamic "secrets" {
+        for_each = local.secret_env_map
+        content {
+          name  = secrets.value
+          value = data.azurerm_key_vault_secret.secrets[secrets.key].value
+        }
+      }
+
+      dynamic "env" {
+        for_each = local.secret_env_map
+        content {
+          name        = env.value
+          secret_name = env.value
+        }
+      }
     }
   }
+
   identity {
     type         = "UserAssigned"
     identity_ids = [azurerm_user_assigned_identity.booking_identity.id]
@@ -46,6 +60,7 @@ resource "azurerm_container_app" "booking_api" {
   ingress {
     external_enabled = true
     target_port      = 5006
+
     traffic_weight {
       percentage      = 100
       latest_revision = true
@@ -58,7 +73,16 @@ resource "azurerm_container_app" "booking_api" {
     identity = azurerm_user_assigned_identity.booking_identity.id
   }
 
-  depends_on = [azurerm_role_assignment.acr_pull, azurerm_role_assignment.github_acr_pull]
+  lifecycle {
+    ignore_changes = [
+      template[0].container[0].image
+    ]
+  }
+
+  depends_on = [
+    azurerm_role_assignment.acr_pull,
+    azurerm_role_assignment.github_acr_pull
+  ]
 }
 
 
@@ -72,8 +96,10 @@ resource "azurerm_container_app" "booking_frontend" {
   template {
     container {
       name = "fonteynfrontend"
-      image  = local.frontend_image
-      #image  = "${azurerm_container_registry.fonteyn_acr.login_server}/fonteyn-booking-app-frontend:1.0"
+      #image  = local.frontend_image
+      # This image is only used for initial deployment.
+      # Actual version is managed by the application pipeline via Azure CLI after build.
+      image  = "${azurerm_container_registry.fonteyn_acr.login_server}/fonteyn-booking-app-frontend:1.0"
       cpu    = 0.25
       memory = "0.5Gi"
       env {
@@ -101,6 +127,11 @@ resource "azurerm_container_app" "booking_frontend" {
     server   = azurerm_container_registry.fonteyn_acr.login_server
     identity = azurerm_user_assigned_identity.booking_identity.id
   }
+  lifecycle {
+  ignore_changes = [
+    template[0].container[0].image
+  ]
+  }
 
   depends_on = [azurerm_role_assignment.acr_pull, azurerm_role_assignment.github_acr_pull]
 }
@@ -115,8 +146,10 @@ resource "azurerm_container_app" "booking_admin" {
   template {
     container {
       name = "fonteynadmin"
-      image  = local.backend_image
-      #image  = "${azurerm_container_registry.fonteyn_acr.login_server}/fonteyn-booking-app-adminfrontend:1.0"
+      #image  = local.backend_image
+      # This image is only used for initial deployment.
+      # Actual version is managed by the application pipeline via Azure CLI after build.
+      image  = "${azurerm_container_registry.fonteyn_acr.login_server}/fonteyn-booking-app-adminfrontend:1.0" 
       cpu    = 0.25
       memory = "0.5Gi"
       env {
@@ -143,6 +176,12 @@ resource "azurerm_container_app" "booking_admin" {
   registry {
     server   = azurerm_container_registry.fonteyn_acr.login_server
     identity = azurerm_user_assigned_identity.booking_identity.id
+  }
+
+  lifecycle {
+  ignore_changes = [
+    template[0].container[0].image
+  ]
   }
 
   depends_on = [azurerm_role_assignment.acr_pull, azurerm_role_assignment.github_acr_pull]

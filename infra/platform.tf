@@ -22,7 +22,22 @@ resource "azurerm_key_vault_secret" "mysql_password" {
   key_vault_id = azurerm_key_vault.booking_keyvault.id
   value        = var.mysql_password
 }
-
+locals {
+  secret_env_map = {
+    "dbusernamesecret"  = "DB_USERNAME_SECRET"
+    "dbpasswordsecret"  = "DB_PASSWORD_SECRET"
+    "apikey"            = "API_KEY"
+    "secretkey"         = "SECRET_KEY"
+    "clientid"          = "CLIENT_ID"
+    "clientsecret"      = "CLIENT_SECRET"
+    "authority"         = "AUTHORITY"
+  }
+}
+data "azurerm_key_vault_secret" "secrets" {
+  for_each     = local.secret_env_map
+  name         = each.key
+  key_vault_id = data.azurerm_key_vault.booking_keyvault.id
+}
 # MySQL DB
 resource "azurerm_mysql_flexible_server" "booking_db" {
   name                   = var.mysqldb_name
@@ -33,7 +48,7 @@ resource "azurerm_mysql_flexible_server" "booking_db" {
   sku_name               = var.mysqldb_sku
   # private_dns_zone_id          = azurerm_private_dns_zone.mysql_private_dns_zone.id
   # delegated_subnet_id          = azurerm_subnet.db_subnet.id
-  public_network_access        = "Enabled"
+  #public_network_access        = "Enabled"
   backup_retention_days        = 7
   geo_redundant_backup_enabled = false
   tags                         = var.tags
