@@ -6,12 +6,22 @@ locals {
 
 locals {
   secret_env_map = {
-    "dbusernamesecret"  = "DB_USERNAME_SECRET"
-    "dbpasswordsecret"  = "DB_PASSWORD_SECRET"
-    "apikey"            = "API_KEY"
-    "secretkey"         = "SECRET_KEY"
+    "clientid"          = "client-id"
+    "clientsecret"      = "client-secret"
+    "authority"         = "authority"
+    "apikey"            = "api-key"
+    "secretkey"         = "secret-key"
+    "dbusernamesecret"  = "db-username"
+    "dbpasswordsecret"  = "db-password"
+  }
+
+  secret_env_var_map = {
     "clientid"          = "CLIENT_ID"
     "clientsecret"      = "CLIENT_SECRET"
     "authority"         = "AUTHORITY"
+    "apikey"            = "API_KEY"
+    "secretkey"         = "SECRET_KEY"
+    "dbusernamesecret"  = "DB_USERNAME_SECRET"
+    "dbpasswordsecret"  = "DB_PASSWORD_SECRET"
   }
 }

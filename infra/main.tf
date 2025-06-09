@@ -27,7 +27,6 @@ resource "azurerm_container_app" "booking_api" {
   revision_mode                = "Single"
   tags                         = var.tags
 
-
   dynamic "secret" {
     for_each = local.secret_env_map
     content {
@@ -37,8 +36,6 @@ resource "azurerm_container_app" "booking_api" {
     }
   }
 
-
-
   template {
     container {
       name   = "fonteynapi"
@@ -46,10 +43,10 @@ resource "azurerm_container_app" "booking_api" {
       cpu    = 0.25
       memory = "0.5Gi"
       dynamic "env" {
-        for_each = local.secret_env_map
+        for_each = local.secret_env_var_map
         content {
           name        = env.value
-          secret_name = env.value
+          secret_name = local.secret_env_map[env.key]
         }
       }
     }
