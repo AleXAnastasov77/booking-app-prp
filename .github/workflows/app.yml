@@ -78,3 +78,27 @@ jobs:
             --name admin-booking-prod-sweden-001 \
             --resource-group rg-booking-prod-sweden-001 \
             --image crfonteyn001.azurecr.io/fonteyn-booking-app-adminfrontend:${{ github.sha }}
+       # 10. Fetch API URL and set as ENV in frontend/admin apps
+      - name: Update API_URL env var in frontend and admin apps
+        run: |
+          # Get latest API FQDN
+          fqdn=$(az containerapp show \
+            --name api-booking-prod-sweden-001 \
+            --resource-group rg-booking-prod-sweden-001 \
+            --query properties.latestRevisionFqdn \
+            --output tsv)
+
+          # Compose full API URL (e.g., https://<fqdn>)
+          api_url="https://${fqdn}"
+
+          # Inject API_URL into frontend
+          az containerapp update \
+            --name frontend-booking-prod-sweden-001 \
+            --resource-group rg-booking-prod-sweden-001 \
+            --set-env-vars API_URL=${api_url}
+
+          # Inject API_URL into admin frontend
+          az containerapp update \
+            --name admin-booking-prod-sweden-001 \
+            --resource-group rg-booking-prod-sweden-001 \
+            --set-env-vars API_URL=${api_url}
