@@ -1,17 +1,6 @@
 name: Terraform Deploy to Azure
 
 on:
-  workflow_dispatch:
-      inputs:
-        backend_image:
-          required: false
-          type: string
-        frontend_image:
-          required: false
-          type: string
-        admin_image:
-          required: false
-          type: string
   push:
     paths:
       - 'infra/**'
@@ -35,9 +24,6 @@ jobs:
       ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
       TF_VAR_mysql_username: ${{ secrets.TF_VAR_mysql_username }}
       TF_VAR_mysql_password: ${{ secrets.TF_VAR_mysql_password }}
-      BACKEND_IMAGE: ${{ github.event.inputs.backend_image }}
-      FRONTEND_IMAGE: ${{ github.event.inputs.frontend_image }}
-      ADMIN_IMAGE: ${{ github.event.inputs.admin_image }}
 
     steps:
       - name: Checkout Code
@@ -63,10 +49,7 @@ jobs:
 
       - name: Terraform Plan
         run: |
-          terraform plan -out=tfplan \
-           -var="backend_image=$BACKEND_IMAGE" \
-           -var="frontend_image=$FRONTEND_IMAGE" \
-           -var="admin_image=$ADMIN_IMAGE"
+          terraform plan -out=tfplan
         working-directory: ./infra
 
       - name: Show Terraform Plan Output
@@ -98,9 +81,6 @@ jobs:
       ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
       TF_VAR_mysql_username: ${{ secrets.TF_VAR_mysql_username }}
       TF_VAR_mysql_password: ${{ secrets.TF_VAR_mysql_password }}
-      BACKEND_IMAGE: ${{ github.event.inputs.backend_image }}
-      FRONTEND_IMAGE: ${{ github.event.inputs.frontend_image }}
-      ADMIN_IMAGE: ${{ github.event.inputs.admin_image }}
 
     steps:
       - name: Checkout Code
@@ -128,8 +108,5 @@ jobs:
 
       - name: Terraform Apply
         run: |
-          terraform apply -auto-approve \
-           -var="backend_image=$BACKEND_IMAGE" \
-           -var="frontend_image=$FRONTEND_IMAGE" \
-           -var="admin_image=$ADMIN_IMAGE"
+          terraform apply -auto-approve
         working-directory: ./infra
