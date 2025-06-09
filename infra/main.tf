@@ -42,6 +42,10 @@ resource "azurerm_container_app" "booking_api" {
       image  = "${azurerm_container_registry.fonteyn_acr.login_server}/fonteyn-booking-app-api:1.0"
       cpu    = 0.25
       memory = "0.5Gi"
+      env {
+        name  = "AZURE_CLIENT_ID"
+        value = azurerm_user_assigned_identity.booking_identity.client_id
+      }
       dynamic "env" {
         for_each = local.secret_env_var_map
         content {
