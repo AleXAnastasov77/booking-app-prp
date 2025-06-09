@@ -36,7 +36,7 @@ locals {
 data "azurerm_key_vault_secret" "secrets" {
   for_each     = local.secret_env_map
   name         = each.key
-  key_vault_id = data.azurerm_key_vault.booking_keyvault.id
+  key_vault_id = azurerm_key_vault.booking_keyvault.id
 }
 # MySQL DB
 resource "azurerm_mysql_flexible_server" "booking_db" {

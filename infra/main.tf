@@ -34,21 +34,21 @@ resource "azurerm_container_app" "booking_api" {
       cpu   = 0.25
       memory = "0.5Gi"
 
-      dynamic "secrets" {
-        for_each = local.secret_env_map
-        content {
-          name  = secrets.value
-          value = data.azurerm_key_vault_secret.secrets[secrets.key].value
-        }
-      }
+    }
+  }
+  dynamic "secrets" {
+    for_each = local.secret_env_map
+    content {
+      name  = secrets.value
+      value = data.azurerm_key_vault_secret.secrets[secrets.key].value
+    }
+  }
 
-      dynamic "env" {
-        for_each = local.secret_env_map
-        content {
-          name        = env.value
-          secret_name = env.value
-        }
-      }
+  dynamic "env" {
+    for_each = local.secret_env_map
+    content {
+      name        = env.value
+      secret_name = env.value
     }
   }
 
