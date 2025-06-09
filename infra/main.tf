@@ -38,13 +38,6 @@ resource "azurerm_container_app" "booking_api" {
   }
 
 
-  dynamic "environment_variable" {
-    for_each = local.secret_env_map
-    content {
-      name        = environment_variable.value
-      secret_name = environment_variable.value
-    }
-  }
 
   template {
     container {
@@ -52,6 +45,13 @@ resource "azurerm_container_app" "booking_api" {
       image  = "${azurerm_container_registry.fonteyn_acr.login_server}/fonteyn-booking-app-api:1.0"
       cpu    = 0.25
       memory = "0.5Gi"
+      dynamic "env" {
+        for_each = local.secret_env_map
+        content {
+          name        = environment_variable.value
+          secret_name = environment_variable.value
+        }
+      }
     }
   }
 
