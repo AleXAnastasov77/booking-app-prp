@@ -57,7 +57,7 @@ resource "azurerm_container_app" "booking_api" {
     min_replicas = 1
     max_replicas = 3
     http_scale_rule {
-      name = "HTTP scaling rule"
+      name = "http-scaling-rule"
       concurrent_requests = 50
     }
   }
@@ -135,7 +135,7 @@ resource "azurerm_container_app" "booking_frontend" {
     min_replicas = 1
     max_replicas = 3
     http_scale_rule {
-      name = "HTTP scaling rule"
+      name = "http-scaling-rule"
       concurrent_requests = 50
       
     }
