@@ -68,7 +68,7 @@ resource "azurerm_container_app" "booking_api" {
   }
 
   ingress {
-    external_enabled = true
+    external_enabled = false
     target_port      = 5006
 
     traffic_weight {
@@ -146,7 +146,7 @@ resource "azurerm_container_app" "booking_frontend" {
   }
 
   ingress {
-    external_enabled = true
+    external_enabled = false
     target_port      = 5008
     traffic_weight {
       percentage      = 100
@@ -210,7 +210,7 @@ resource "azurerm_container_app" "booking_admin" {
   }
 
   ingress {
-    external_enabled = true
+    external_enabled = false
     target_port      = 5007
     traffic_weight {
       percentage      = 100
