@@ -25,3 +25,9 @@ locals {
     "dbpasswordsecret"  = "DB_PASSWORD_SECRET"
   }
 }
+resource "random_id" "front_door_endpoint" {
+  byte_length = 8
+}
+locals {
+  frontdoorendpoint_name = "fonteyn-${lower(random_id.front_door_endpoint.hex)}"
+}

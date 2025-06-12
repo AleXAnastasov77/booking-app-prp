@@ -109,11 +109,6 @@ variable "frontdoor_name" {
   description = "The name of the front door profile"
   type = string
 }
-variable "frontdoorendpoint_name" {
-  description = "The name of the front door profile"
-  type = string
-  default = "fonteyn-${lower(random_id.front_door_endpoint_name.hex)}"
-}
 variable "origin_admin_name" {
   description = "The name of the origin group for the admin container"
   type = string

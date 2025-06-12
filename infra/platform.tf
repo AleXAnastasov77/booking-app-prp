@@ -36,9 +36,9 @@ resource "azurerm_mysql_flexible_server" "booking_db" {
   administrator_login    = azurerm_key_vault_secret.mysql_username.value
   administrator_password = azurerm_key_vault_secret.mysql_password.value
   sku_name               = var.mysqldb_sku
-  # private_dns_zone_id          = azurerm_private_dns_zone.mysql_private_dns_zone.id
-  # delegated_subnet_id          = azurerm_subnet.db_subnet.id
-  #public_network_access        = "Enabled"
+  private_dns_zone_id          = azurerm_private_dns_zone.mysql_private_dns_zone.id
+  delegated_subnet_id          = azurerm_subnet.db_subnet.id
+  public_network_access        = "Enabled"
   backup_retention_days        = 7
   geo_redundant_backup_enabled = false
   tags                         = var.tags
@@ -92,11 +92,9 @@ resource "azurerm_cdn_frontdoor_profile" "booking_frontdoor" {
   sku_name            = "Standard_AzureFrontDoor"
   tags = var.tags
 }
-resource "random_id" "frontdoorendpoint_name" {
-  byte_length = 8
-}
+
 resource "azurerm_cdn_frontdoor_endpoint" "frontdoor_endpoint" {
-  name                     = var.frontdoorendpoint_name
+  name                     = local.frontdoorendpoint_name
   cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.booking_frontdoor.id
 }
 resource "azurerm_cdn_frontdoor_origin_group" "frontdoor_admin_og" {
@@ -187,5 +185,29 @@ resource "azurerm_cdn_frontdoor_rule" "frontdoor_rule" {
       preserve_unmatched_path = true
     }
   }
-  
+}
+
+resource "azurerm_cdn_frontdoor_firewall_policy" "frontdoor_firewall_policy" {
+  name = "WAFfFIREWALLpolicy"
+  resource_group_name = azurerm_resource_group.platform_rg.name
+  sku_name = azurerm_cdn_frontdoor_profile.booking_frontdoor.sku_name
+  enabled = true
+  mode = "Prevention"
+}
+resource "azurerm_cdn_frontdoor_security_policy" "frontdoor_security_policy" {
+  name                     = "WAFpolicy"
+  cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.booking_frontdoor.id
+
+  security_policies {
+    firewall {
+      cdn_frontdoor_firewall_policy_id = azurerm_cdn_frontdoor_firewall_policy.frontdoor_firewall_policy.id
+
+      association {
+        domain {
+          cdn_frontdoor_domain_id = azurerm_cdn_frontdoor_profile.booking_frontdoor.id
+        }
+        patterns_to_match = ["/*"]
+      }
+    }
+  }
 }
