@@ -112,10 +112,10 @@ variable "frontdoor_name" {
 variable "origin_admin_name" {
   description = "The name of the origin group for the admin container"
   type = string
-  default = "origin_admin"
+  default = "origin-admin"
 }
 variable "origin_frontend_name" {
   description = "The name of the origin group for the frontend container"
   type = string
-  default = "origin_frontend"
+  default = "origin-frontend"
 }
