@@ -196,7 +196,7 @@ resource "azurerm_cdn_frontdoor_firewall_policy" "frontdoor_firewall_policy" {
 }
 resource "azurerm_cdn_frontdoor_security_policy" "frontdoor_security_policy" {
   name                     = "WAFpolicy"
-  cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_endpoint.frontdoor_endpoint.id
+  cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.booking_frontdoor.id
 
   security_policies {
     firewall {
@@ -204,7 +204,7 @@ resource "azurerm_cdn_frontdoor_security_policy" "frontdoor_security_policy" {
 
       association {
         domain {
-          cdn_frontdoor_domain_id = azurerm_cdn_frontdoor_profile.booking_frontdoor.id
+          cdn_frontdoor_domain_id = azurerm_cdn_frontdoor_endpoint.frontdoor_endpoint.id
         }
         patterns_to_match = ["/*"]
       }
