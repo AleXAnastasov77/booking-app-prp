@@ -104,3 +104,23 @@ variable "admin_image" {
   default     = ""
 }
 
+# Front door
+variable "frontdoor_name" {
+  description = "The name of the front door profile"
+  type = string
+}
+variable "frontdoorendpoint_name" {
+  description = "The name of the front door profile"
+  type = string
+  default = "fonteyn-${lower(random_id.front_door_endpoint_name.hex)}"
+}
+variable "origin_admin_name" {
+  description = "The name of the origin group for the admin container"
+  type = string
+  default = "origin_admin"
+}
+variable "origin_frontend_name" {
+  description = "The name of the origin group for the frontend container"
+  type = string
+  default = "origin_frontend"
+}

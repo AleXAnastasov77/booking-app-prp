@@ -27,3 +27,5 @@ container_api_name      = "api-booking-prod-sweden-001"
 container_admin_name    = "admin-booking-prod-sweden-001"
 container_frontend_name = "frontend-booking-prod-sweden-001"
 
+# Front door
+frontdoor_name = "fd-booking-prod-sweeden-002"

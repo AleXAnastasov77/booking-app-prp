@@ -84,3 +84,108 @@ resource "azurerm_log_analytics_workspace" "booking_logs" {
   retention_in_days   = 30
   tags                = var.tags
 }
+
+# Front Door
+resource "azurerm_cdn_frontdoor_profile" "booking_frontdoor" {
+  name                = var.frontdoor_name
+  resource_group_name = azurerm_resource_group.platform_rg.name
+  sku_name            = "Standard_AzureFrontDoor"
+  tags = var.tags
+}
+resource "random_id" "frontdoorendpoint_name" {
+  byte_length = 8
+}
+resource "azurerm_cdn_frontdoor_endpoint" "frontdoor_endpoint" {
+  name                     = var.frontdoorendpoint_name
+  cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.booking_frontdoor.id
+}
+resource "azurerm_cdn_frontdoor_origin_group" "frontdoor_admin_og" {
+  name                     = var.origin_admin_name
+  cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.booking_frontdoor.id
+  session_affinity_enabled = true
+  load_balancing {}
+}
+resource "azurerm_cdn_frontdoor_origin" "frontdoor_admin_origin" {
+  name                          = "admin"
+  cdn_frontdoor_origin_group_id = azurerm_cdn_frontdoor_origin_group.frontdoor_admin_og.id
+
+  enabled                        = true
+  host_name                      = azurerm_container_app.booking_admin.latest_revision_fqdn
+  http_port                      = 80
+  https_port                     = 443
+  origin_host_header             = azurerm_container_app.booking_admin.latest_revision_fqdn
+  priority                       = 1
+  weight                         = 1000
+  certificate_name_check_enabled = true
+}
+
+resource "azurerm_cdn_frontdoor_route" "frontdoor_admin_route" {
+  name                          = "admin"
+  enabled = true
+  cdn_frontdoor_endpoint_id     = azurerm_cdn_frontdoor_endpoint.frontdoor_endpoint.id
+  cdn_frontdoor_origin_group_id = azurerm_cdn_frontdoor_origin_group.frontdoor_admin_og.id
+  cdn_frontdoor_origin_ids      = [azurerm_cdn_frontdoor_origin.frontdoor_admin_origin.id]
+  cdn_frontdoor_origin_path = "/"
+  cdn_frontdoor_rule_set_ids = [azurerm_cdn_frontdoor_rule_set.frontdoor_ruleset.id]
+
+  supported_protocols    = ["Http", "Https"]
+  patterns_to_match      = ["/admin", "/admin/*"]
+  forwarding_protocol    = "HttpsOnly"
+  link_to_default_domain = true
+  https_redirect_enabled = true
+}
+resource "azurerm_cdn_frontdoor_origin_group" "frontdoor_frontend_og" {
+  name                     = var.origin_frontend_name
+  cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.booking_frontdoor.id
+  session_affinity_enabled = true
+  load_balancing {}
+}
+resource "azurerm_cdn_frontdoor_origin" "frontdoor_frontend_origin" {
+  name                          = "frontend"
+  cdn_frontdoor_origin_group_id = azurerm_cdn_frontdoor_origin_group.frontdoor_frontend_og.id
+
+  enabled                        = true
+  host_name                      = azurerm_container_app.booking_frontend.latest_revision_fqdn
+  http_port                      = 80
+  https_port                     = 443
+  origin_host_header             = azurerm_container_app.booking_frontend.latest_revision_fqdn
+  priority                       = 1
+  weight                         = 1000
+  certificate_name_check_enabled = true
+}
+
+resource "azurerm_cdn_frontdoor_route" "frontdoor_frontend_route" {
+  name                          = "frontend"
+  cdn_frontdoor_endpoint_id     = azurerm_cdn_frontdoor_endpoint.frontdoor_endpoint.id
+  cdn_frontdoor_origin_group_id = azurerm_cdn_frontdoor_origin_group.frontdoor_frontend_og.id
+  cdn_frontdoor_origin_ids      = [azurerm_cdn_frontdoor_origin.frontdoor_frontend_origin.id]
+
+  supported_protocols    = ["Http", "Https"]
+  patterns_to_match      = ["/", "/*"]
+  forwarding_protocol    = "HttpsOnly"
+  link_to_default_domain = true
+  https_redirect_enabled = true
+}
+
+resource "azurerm_cdn_frontdoor_rule_set" "frontdoor_ruleset" {
+  name                     = "adminredirect"
+  cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.booking_frontdoor.id
+}
+
+resource "azurerm_cdn_frontdoor_rule" "frontdoor_rule" {
+  depends_on = [azurerm_cdn_frontdoor_origin_group.frontdoor_admin_og, azurerm_cdn_frontdoor_origin.frontdoor_admin_origin]
+  
+  name = "adminredirect"
+  cdn_frontdoor_rule_set_id = azurerm_cdn_frontdoor_rule_set.frontdoor_ruleset.id
+  order                     = 1
+  behavior_on_match         = "Continue"
+
+  actions {
+    url_rewrite_action {
+      source_pattern = "/"
+      destination = "/"
+      preserve_unmatched_path = true
+    }
+  }
+  
+}
