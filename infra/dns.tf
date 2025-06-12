@@ -21,6 +21,12 @@ resource "azurerm_private_dns_zone_virtual_network_link" "mysql_dns_link002" {
   private_dns_zone_name = azurerm_private_dns_zone.mysql_private_dns_zone.name
   virtual_network_id    = azurerm_virtual_network.booking_spoke_vnet.id
 }
+resource "azurerm_private_dns_zone_virtual_network_link" "mysql_dns_link003" {
+  name                  = "dnslink-northeu-003"
+  resource_group_name   = azurerm_resource_group.platform_rg.name
+  private_dns_zone_name = azurerm_private_dns_zone.mysql_private_dns_zone.name
+  virtual_network_id    = "b788a7de-d474-4a83-9657-4934772d3470"
+}
 resource "azurerm_private_dns_zone_virtual_network_link" "keyvault_dns_link001" {
   name                  = "dnslink-northeu-003"
   resource_group_name   = azurerm_resource_group.platform_rg.name
