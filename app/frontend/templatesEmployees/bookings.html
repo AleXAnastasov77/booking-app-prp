@@ -1,37 +1,39 @@
 {% extends "menu.html" %}
 
 {% block content %}
-<h2>Bookings List</h2>
+<h2 class="text-2xl font-semibold mb-6 text-gray-800">Bookings List</h2>
 
-<table class="table table-bordered">
-    <thead class="table-dark">
-        <tr>
-            <th>ID</th>
-            <th>User ID</th>
-            <th>Place ID</th>
-            <th>Start Date</th>
-            <th>End Date</th>
-            <th>Price/Night</th>
-            <th>Num Nights</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for booking in bookings %}
-        <tr>
-            <td>{{ booking.id }}</td>
-            <td>{{ booking.user_id }}</td>
-            <td>{{ booking.place_id }}</td>
-            <td>{{ booking.start_date }}</td>
-            <td>{{ booking.end_date }}</td>
-            <td>{{ booking.price_per_night }}</td>
-            <td>{{ booking.num_nights }}</td>
-            <td>
-                <a href="/edit-booking/{{ booking.id }}" class="btn btn-sm btn-primary">Edit</a>
-                <a href="/delete-booking/{{ booking.id }}" class="btn btn-sm btn-danger" onclick="return confirm('Delete this booking?')">Delete</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="overflow-x-auto bg-white shadow-md rounded">
+    <table class="min-w-full table-auto border border-gray-200">
+        <thead class="bg-gray-800 text-white">
+            <tr>
+                <th class="px-4 py-3 text-left">Booking ID</th>
+                <th class="px-4 py-3 text-left">User ID</th>
+                <th class="px-4 py-3 text-left">Accommodation ID</th>
+                <th class="px-4 py-3 text-left">Check-in Date</th>
+                <th class="px-4 py-3 text-left">Check-out Date</th>
+                <th class="px-4 py-3 text-left">Actions</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200">
+            {% for booking in bookings %}
+            <tr class="hover:bg-gray-50">
+                <td class="px-4 py-2 text-gray-700">{{ booking.booking_id }}</td>
+                <td class="px-4 py-2 text-gray-700">{{ booking.user_id }}</td>
+                <td class="px-4 py-2 text-gray-700">{{ booking.accommodation_id }}</td>
+                <td class="px-4 py-2 text-gray-700">
+                    {{ booking.check_in_date[:16]|replace("T", " ") }}
+                </td>
+                <td class="px-4 py-2 text-gray-700">
+                    {{ booking.check_out_date[:16]|replace("T", " ") }}
+                </td>
+                <td class="px-4 py-2 space-x-2">
+                    <a href="/edit-booking/{{ booking.booking_id }}" class="bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">Edit</a>
+                    <a href="/delete-booking/{{ booking.booking_id }}" onclick="return confirm('Delete this booking?')" class="bg-red-600 text-white px-3 py-1 rounded text-sm hover:bg-red-700">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}

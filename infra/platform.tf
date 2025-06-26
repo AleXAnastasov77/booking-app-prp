@@ -38,7 +38,7 @@ resource "azurerm_mysql_flexible_server" "booking_db" {
   sku_name               = var.mysqldb_sku
   private_dns_zone_id          = azurerm_private_dns_zone.mysql_private_dns_zone.id
   delegated_subnet_id          = azurerm_subnet.db_subnet.id
-  public_network_access        = "Enabled"
+  #public_network_access        = "Enabled"
   backup_retention_days        = 7
   geo_redundant_backup_enabled = false
   tags                         = var.tags

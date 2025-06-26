@@ -11,7 +11,7 @@ app.add_api("user-api.yaml", strict_validation=True, pass_context_arg_name='requ
 
 # Access the underlying Flask app
 flask_app = app.app
-flask_app.secret_key = CONFIG["api"]["secret_key"]
+flask_app.secret_key = str(CONFIG["api"]["secret_key"])
 
 # Optional: expose Authorization in CORS
 CORS(flask_app, expose_headers=["Authorization"])

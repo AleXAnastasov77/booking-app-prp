@@ -8,6 +8,8 @@ import logging
 app = Flask(__name__, static_folder="staticCustomers", template_folder="templatesCustomers")
 app.secret_key = get_secret_key()
 
+API_URL = CONFIG["api"]["url"]
+
 
 def login_required(f):
     @wraps(f)
@@ -28,7 +30,7 @@ def login():
         email = request.form.get("email")
         password = request.form.get("password")
         payload = {"email":email, "password":password}
-        response = requests.post(f"{CONFIG['api']['url']}/login", headers=get_headers(), json=payload)
+        response = requests.post(f"{API_URL}/login", headers=get_headers(), json=payload)
         if response.status_code == 200:
             data = response.json()
             user_id = data.get("user_id")

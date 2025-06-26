@@ -11,6 +11,11 @@ resource "azurerm_resource_group" "platform_rg" {
   location = var.location
   tags     = var.tags
 }
+resource "azurerm_resource_group" "test_rg" {
+  name     = "PRP_demo"
+  location = var.location
+  tags     = var.tags
+}
 
 resource "azurerm_container_app_environment" "booking_env" {
   name                       = "containerenv-booking-prod-sweden-001"

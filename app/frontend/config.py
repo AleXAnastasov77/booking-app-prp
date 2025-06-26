@@ -8,7 +8,8 @@ API_KEY=os.getenv("API_KEY")
 
 CONFIG = configparser.ConfigParser()
 CONFIG.read("config.ini")
-CONFIG['api']['url'] = os.getenv("API_URL")
+
+CONFIG["api"]["url"] = os.getenv("API_URL")
 
 def get_headers():
     headers = {

@@ -15,11 +15,11 @@
         <tbody class="divide-y divide-gray-200">
             {% for user in users %}
             <tr class="hover:bg-gray-50">
-                <td class="px-4 py-2 text-gray-700">{{ user.id }}</td>
+                <td class="px-4 py-2 text-gray-700">{{ user.user_id }}</td>
                 <td class="px-4 py-2 text-gray-700">{{ user.email }}</td>
                 <td class="px-4 py-2 space-x-2">
-                    <a href="/edit-user/{{ user.id }}" class="bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">Edit</a>
-                    <a href="/delete-user/{{ user.id }}" onclick="return confirm('Delete this user?')" class="bg-red-600 text-white px-3 py-1 rounded text-sm hover:bg-red-700">Delete</a>
+                    <a href="/edit-user/{{ user.user_id }}" class="bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">Edit</a>
+                    <a href="/delete-user/{{ user.user_id }}" onclick="return confirm('Delete this user?')" class="bg-red-600 text-white px-3 py-1 rounded text-sm hover:bg-red-700">Delete</a>
                 </td>
             </tr>
             {% endfor %}
