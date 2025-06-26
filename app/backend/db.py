@@ -8,6 +8,7 @@ from azure.identity import ManagedIdentityCredential
 from azure.identity import DefaultAzureCredential
 from azure.keyvault.secrets import SecretClient
 from config import CONFIG
+import socket 
 
 load_dotenv()
 
