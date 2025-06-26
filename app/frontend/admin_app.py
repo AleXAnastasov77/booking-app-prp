@@ -122,7 +122,8 @@ def edit_user(user_id):
 @app.route('/delete-user/<string:user_id>')
 def delete_user(user_id):
     response = requests.delete(f"{BACKEND_URL}/users/{user_id}")
-    return redirect(url_for('users'))
+    if response.status_code == 200:
+        return redirect(url_for('users'))
 
 
 @app.route('/bookings')
@@ -143,7 +144,8 @@ def create_booking():
             "date": request.form['date']
         }
         response = requests.post(f"{BACKEND_URL}/bookings", json=data)
-        return redirect(url_for('bookings'))
+        if response.status_code == 200:
+            return redirect(url_for('bookings'))
     return render_template('create_booking.html')
 
 
@@ -169,7 +171,8 @@ def edit_booking(booking_id):
 @app.route('/delete-booking/<string:booking_id>')
 def delete_booking(booking_id):
     response = requests.delete(f"{BACKEND_URL}/bookings/{booking_id}")
-    return redirect(url_for('bookings'))
+    if response.status_code == 200:
+        return redirect(url_for('bookings'))
 
 
 if __name__ == '__main__':
